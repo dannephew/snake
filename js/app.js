@@ -4,8 +4,7 @@
 let snakeArray, head, food, obstacle, wall, boardLength, tick, direction
 
 /*------------------------ Cached Element References ------------------------*/
-const segment = document.querySelector(".dot")
-console.log(segment)
+// console.log("segment", segment)
 const emptyBoard = document.querySelector(".grid")
 const gameResult = document.querySelector("#game-result")
 const score = document.querySelector("#score")
@@ -67,15 +66,31 @@ boardNodeList[0].remove()
 console.log(boardNodeList)
 
 function init() {
-    snakeArray = [1024]
+    snakeArray = [1024, 1025]
     makeSnake()
 }
 
 //whatever numbers are in the snakeArray, renders it as a snake on the board
+
+// function makeSegment() {
+//     for (i=0; i <= snakeArray.length; i++) {
+//         let segment = document.createElement("div")
+//         segment.setAttribute("class", "dot") 
+//         // console.log()
+//     }
+// }
+
 function makeSnake() {
+    // for (i=0; i < snakeArray.length; i++) {
+
+    //     // console.log()
     snakeArray.forEach(function (coordinate) {
+        let segment = document.createElement("div")
+        segment.setAttribute("class", "dot") 
         boardNodeList[coordinate].appendChild(segment)
-        console.log("hi")
+        console.log(boardNodeList)
+        // console.log("hi")
+        // console.log(boardNodeList)
     })
 }
 
