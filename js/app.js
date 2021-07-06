@@ -89,26 +89,28 @@ function init() {
 } 
 
 
-init()
+// init()
 // console.log(numObstacles)
 
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
-// playBtn.onclick = function() {
-//     init()
-//     // console.log("hi")
-//     timer = setInterval(function() {
-//         // console.log("hey")
-//         timeLeft -= 1
-//         console.log(timeLeft)
-//         advanceGame()
-//         if (timeLeft <= 0) {
-//             console.log("clearInterval")
-//             clearInterval(timer)
-//         }
-//         }, 200)
-// }
-
+//------------------------------------------------------------------------
+playBtn.onclick = function() {
+    // wipeSnake()
+    init()
+    // console.log("hi")
+    timer = setInterval(function() {
+        // console.log("hey")
+        timeLeft -= 1
+        console.log(timeLeft)
+        advanceGame()
+        if (timeLeft <= 0) {
+            console.log("clearInterval")
+            clearInterval(timer)
+        }
+        }, 200)
+}
+//------------------------------------------------------------------------
 
 
 // let interval = setInterval(function() {
@@ -222,79 +224,87 @@ function renderFoodArray() {
 //checks if new snake coordinate bumps into food 
 function advanceGame() {
     // console.log("advance game called")
-    if (!foodArray.includes(snakeArray[0])) {
-        switch(direction) {
-            //check if there should be quotation marks around numbers
-            case 1: 
-                wipeSnake()
-                console.log("up")
-                snakeArray.unshift(snakeArray[0]-50)
-                snakeArray.pop()
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 2: 
-                wipeSnake()
-                console.log("down")
-                snakeArray.unshift(snakeArray[0]+50)
-                snakeArray.pop()
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 3:
-                wipeSnake()
-                console.log("left")
-                snakeArray.unshift(snakeArray[0]-1)
-                snakeArray.pop()
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 4:
-                wipeSnake()
-                console.log("right")
-                snakeArray.unshift(snakeArray[0]+1)
-                snakeArray.pop()
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-        }
-    if (foodArray.includes(snakeArray[0])) {
-        switch(direction) {
-            //check if there should be quotation marks around numbers
-            case 1: 
-                wipeSnake()
-                console.log("up")
-                snakeArray.unshift(snakeArray[0]-50)
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 2: 
-                console.log("down")
-                wipeSnake()
-                snakeArray.unshift(snakeArray[0]+50)
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 3:
-                console.log("left")
-                wipeSnake()
-                snakeArray.unshift(snakeArray[0]-1)
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
-            case 4:
-                console.log("right")
-                wipeSnake()
-                snakeArray.unshift(snakeArray[0]+1)
-                console.log("snakeArray", snakeArray)
-                renderSnake()
-                break
+    if (colObstaclesArray.includes(snakeArray[0])) {
+        gameOver()
+    } else if (!colObstaclesArray.includes(snakeArray[0])) {
+        if (!foodArray.includes(snakeArray[0])) {
+            switch(direction) {
+                //check if there should be quotation marks around numbers
+                case 1: 
+                    wipeSnake()
+                    console.log("up")
+                    snakeArray.unshift(snakeArray[0]-50)
+                    snakeArray.pop()
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 2: 
+                    wipeSnake()
+                    console.log("down")
+                    snakeArray.unshift(snakeArray[0]+50)
+                    snakeArray.pop()
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 3:
+                    wipeSnake()
+                    console.log("left")
+                    snakeArray.unshift(snakeArray[0]-1)
+                    snakeArray.pop()
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 4:
+                    wipeSnake()
+                    console.log("right")
+                    snakeArray.unshift(snakeArray[0]+1)
+                    snakeArray.pop()
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+            }
+        } else if (foodArray.includes(snakeArray[0])) {
+            // while (boardNodeList[snakeArray[0]].firstChild)   {
+            //     boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+            // }     
+            switch(direction) {
+                //check if there should be quotation marks around numbers
+                case 1: 
+                    wipeSnake()
+                    console.log("up")
+                    snakeArray.unshift(snakeArray[0]-50)
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 2: 
+                    console.log("down")
+                    wipeSnake()
+                    snakeArray.unshift(snakeArray[0]+50)
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 3:
+                    console.log("left")
+                    wipeSnake()
+                    snakeArray.unshift(snakeArray[0]-1)
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+                case 4:
+                    console.log("right")
+                    wipeSnake()
+                    snakeArray.unshift(snakeArray[0]+1)
+                    console.log("snakeArray", snakeArray)
+                    renderSnake()
+                    break
+            }
         }
     }
-
+    gameOver()
+    playerWin()
     // console.log("advanceGame")
-    }
 }
+
 
 //makeObstaclesArrays
 //----------
@@ -308,7 +318,7 @@ function makeObstaclesArrays() {
     // }
     // let numCols = Math.floor(Math.random() * numObstacles)
     let numCols = numObstacles
-    console.log("numCols", numCols)
+    // console.log("numCols", numCols)
     // let numRows = numObstacles - numCols
     //Columns: 
     for (i=0; i<numCols; i++) {
@@ -329,28 +339,28 @@ function makeObstaclesArrays() {
         let nextCoordMinus = coordinate - 50
             //how to make coordinate equal to 
         for (i = 0; i < numCoords; i++) {
-            console.log("for loop plus")
+            // console.log("for loop plus")
             if (nextCoordPlus >= 0 && nextCoordPlus <= 1999 && !snakeArray.includes(nextCoordPlus) && !colObstaclesArray.includes(nextCoordPlus) && !rowObstaclesArray.includes(nextCoordPlus) && !foodArray.includes(nextCoordPlus)) {
                 colObstaclesArray.push(nextCoordPlus)
                 // nextCoordPlus50 *= -1
                 nextCoordPlus += 50
-                console.log(colObstaclesArray)
+                // console.log(colObstaclesArray)
             } else {
-                console.log("plus else")
+                // console.log("plus else")
                 return
             }
         }
         for (i = 0; i < numCoords; i++) {
-            console.log("for loop minus")
+            // console.log("for loop minus")
             if (nextCoordMinus >= 0 && nextCoordMinus <= 1999 && !snakeArray.includes(nextCoordMinus) && !colObstaclesArray.includes(nextCoordMinus) && !rowObstaclesArray.includes(nextCoordMinus) && !foodArray.includes(nextCoordMinus)) {
                 colObstaclesArray.push(nextCoordMinus)
                 nextCoordMinus -= 50
-                console.log(colObstaclesArray)
+                // console.log(colObstaclesArray)
             } else {
-                console.log("minus else")
+                // console.log("minus else")
                 return
             }
-    console.log(colObstaclesArray)
+    // console.log(colObstaclesArray)
     }
 })
 renderObstaclesArray()
@@ -400,7 +410,20 @@ function renderObstaclesArray() {
 
 
 
-//gameOver
+//The gameOver function: 
+//if any one of snake array coords is in colObstaclesArray or outside of board, then change gameResult
 function gameOver() {
-    console.log(gameOver)
+    snakeArray.forEach(function(coordinate) {
+        if (colObstaclesArray.includes(coordinate)) {
+            timeLeft = 0
+            gameResult.textContent = "Game Over!"
+        }
+    })
+    console.log("gameOver")
+}
+
+//The playerWin function: 
+
+function playerWin() {
+    console.log("playerWin")
 }
