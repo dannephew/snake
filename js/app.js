@@ -1,44 +1,50 @@
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, head, food, obstacle, wall, boardLength, tick, direction
+let snakeArray, foodArray, food, timeLeft, speed, obstacle, wall, boardLength, tick, numFood, direction
 
 /*------------------------ Cached Element References ------------------------*/
 // console.log("segment", segment)
 const emptyBoard = document.querySelector(".grid")
 const gameResult = document.querySelector("#game-result")
-const score = document.querySelector("#score")
+const time = document.querySelector("#time")
 const resetBtn = document.querySelector("#reset-button")
 const playBtn = document.querySelector("#play-game")
+console.log(playBtn)
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener("keydown", logKey)
 
 function logKey(e) {
-    console.log("e", e)
-    console.log("e.key", e.key)
+    // console.log("e", e)
+    // console.log("e.key", e.key)
     const key = e.key
     //get key attribute of e
     switch(key) {
         case "ArrowUp": 
             console.log("up")
+            direction = 1
             break
         case "ArrowDown":
             console.log("down")
+            direction = 2
             break
         case "ArrowLeft":
             console.log("left")
+            direction = 3
             break
         case "ArrowRight":
             console.log("right")
+            direction = 4
             break
     }
 }
 
 
-
 /*-------------------------------- Functions --------------------------------*/
-//create board with 2000 divs labelled with incrementing ids
+
+//The createBoard function: 
+//creates board with 2000 divs labelled with incrementing ids
 function createBoard() {
     for (i=0; i<2000; i++) {
         let square = document.createElement("div")
@@ -63,14 +69,49 @@ createBoard()
 boardNodeList = emptyBoard.childNodes
 // boardNodeList.shift()
 boardNodeList[0].remove()
-console.log(boardNodeList)
+// console.log(boardNodeList)
 
 function init() {
-    snakeArray = [1024, 1025]
-    makeSnake()
+    snakeArray = [1024]
+    direction = 1
+    timeLeft = 3
+    numFood = 10
+    foodArray = []
+    speed = 0.8
+    renderSnake()
+    makeFoodArray()
 }
 
-//whatever numbers are in the snakeArray, renders it as a snake on the board
+init()
+
+//When clicking the play button, the set timeout function will call advanceGame repeatedly
+playBtn.onclick = function() {
+    console.log("hi")
+    timer = setInterval(function() {
+        console.log("hey")
+        timeLeft -= 1
+        console.log(timeLeft)
+        advanceGame()
+        if (timeLeft <= 0) {
+            clearInterval(timer)
+        }
+        }, 1000)
+}
+
+
+
+// let interval = setInterval(function() {
+//     timeLeft -= 1
+//     console.log(timeLeft)
+//     // advanceGame()
+//     if (timeLeft <= 0) {
+//         clearInterval(interval)
+//     }
+//     }, 1000)
+
+//playBtn.addEventListener("click", console.log("hi"))
+//     //doesn't work bc interval is not a function
+
 
 // function makeSegment() {
 //     for (i=0; i <= snakeArray.length; i++) {
@@ -80,7 +121,8 @@ function init() {
 //     }
 // }
 
-function makeSnake() {
+//for every coordinate in the snakeArray, renders it as a snake on the board
+function renderSnake() {
     // for (i=0; i < snakeArray.length; i++) {
 
     //     // console.log()
@@ -88,12 +130,80 @@ function makeSnake() {
         let segment = document.createElement("div")
         segment.setAttribute("class", "dot") 
         boardNodeList[coordinate].appendChild(segment)
-        console.log(boardNodeList)
+        // console.log(boardNodeList)
         // console.log("hi")
         // console.log(boardNodeList)
     })
 }
 
-init()
+//The makeFoodArray function: 
+//Creates an array of food positions for numFood amounts of food onto random coordinates of the board
+//If random num is the initial position of snake, then num will be set as last coordinate on board
+function makeFoodArray() {
+    for (i=0; i<numFood; i++) {
+        num = Math.floor(Math.random() * 1999)
+        if (num == 1024) {
+            num = 1999
+        }
+        foodArray.push(num)
+    }
+    renderFoodArray()
+}
+// console.log(foodArray)
 
-// boardNodeList[0].textContent = "dani was here"
+// The renderFoodArray function:
+// renders foodArray onto the board
+
+function renderFoodArray() {
+    foodArray.forEach(function (coordinate) {
+        let foodItem = document.createElement("div")
+        foodItem.setAttribute("class", "food")
+        boardNodeList[coordinate].appendChild(foodItem)
+    })
+}
+
+
+//change snake coordinates depending on direction 
+// function moveSnake() {
+//     console.log("moveSnake")
+//     advanceGame()
+// }
+
+//determines velocity (speed and direction) of snake movement
+//how fast should moveSnake be called? 
+// function velocity () {
+//     console.log("velocity")
+// }
+
+
+
+//The advanceGame function: 
+//increment ticks by 1
+//change snake coordinates depending on direction 
+    //if snake doesn't eat: lose a segment, gain a segment 
+    //if snake eats: gain a segment 
+//checks if new snake coordinate bumps into food 
+function advanceGame() {
+    if (foodArray.includes(snakeArray[0])) {
+        switch(direction) {
+            //check if there should be quotation marks around numbers
+            case "1": 
+                console.log("up")
+                break
+            case "2": 
+                console.log("down")
+                break
+            case "3":
+                console.log("left")
+                break
+            case "4":
+                console.log("right")
+                break
+        }
+    }
+
+    //if (snakeArray includes an item in foodArray)
+
+    console.log("advanceGame")
+}
+
