@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(19, 97, 29);
+    background-color: rgb(147, 253, 253);
 }
 .grid {
     background-color: black;
@@ -10,12 +10,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     font-size: 8px;
+    padding: 20px;
+    
   }
   
   .grid div {
     width: 20px;
     height: 20px;
-    border:0.1px black solid;
+    /* border:0.1px whitesmoke solid; */
     box-sizing:border-box
   }
 
@@ -24,18 +26,23 @@ body {
   }
    */
 
-   .dot {
-    height: 20px;
-    width: 20px;
-    background-color: rgb(13, 209, 46);
+   #dot {
+    height: 5px;
+    width: 5px;
+    background-color: rgb(255, 255, 255);
     border-radius: 50%;
     display: inline-block;
+    box-shadow:
+    0 0 20px 3px #fff,  /* inner white */
+    0 0 20px 6px #f0f, /* middle magenta */
+    0 0 10px 9px #0ff; /* outer cyan */
+
   }
 
-  .food {
-    height: 20px;
-    width: 20px;
-    background-color: rgb(205, 206, 146);
+  #food {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(255, 255, 255);
     border-radius: 50%;
     display: inline-block;
   }

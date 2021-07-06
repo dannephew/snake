@@ -72,7 +72,7 @@ boardNodeList[0].remove()
 // console.log(boardNodeList)
 
 function init() {
-    snakeArray = [1024]
+    snakeArray = [1024, 1025, 1026]
     direction = 1
     timeLeft = 3
     numFood = 10
@@ -128,7 +128,7 @@ function renderSnake() {
     //     // console.log()
     snakeArray.forEach(function (coordinate) {
         let segment = document.createElement("div")
-        segment.setAttribute("class", "dot") 
+        segment.setAttribute("id", "dot") 
         boardNodeList[coordinate].appendChild(segment)
         // console.log(boardNodeList)
         // console.log("hi")
@@ -141,9 +141,9 @@ function renderSnake() {
 //If random num is the initial position of snake, then num will be set as last coordinate on board
 function makeFoodArray() {
     for (i=0; i<numFood; i++) {
-        num = Math.floor(Math.random() * 1999)
-        if (num == 1024) {
-            num = 1999
+        num = Math.floor(Math.random() * 2000)
+        while (snakeArray.includes(num)) {
+            num = Math.floor(Math.random() * 2000)
         }
         foodArray.push(num)
     }
@@ -157,7 +157,7 @@ function makeFoodArray() {
 function renderFoodArray() {
     foodArray.forEach(function (coordinate) {
         let foodItem = document.createElement("div")
-        foodItem.setAttribute("class", "food")
+        foodItem.setAttribute("id", "food")
         boardNodeList[coordinate].appendChild(foodItem)
     })
 }
@@ -187,6 +187,23 @@ function advanceGame() {
     if (foodArray.includes(snakeArray[0])) {
         switch(direction) {
             //check if there should be quotation marks around numbers
+            case 1: 
+                console.log("up")
+                break
+            case 2: 
+                console.log("down")
+                break
+            case "3":
+                console.log("left")
+                break
+            case "4":
+                console.log("right")
+                break
+        }
+    }
+    if (!foodArray.includes(snakeArray[0])) {
+        switch(direction) {
+            //check if there should be quotation marks around numbers
             case "1": 
                 console.log("up")
                 break
@@ -200,10 +217,8 @@ function advanceGame() {
                 console.log("right")
                 break
         }
-    }
-
-    //if (snakeArray includes an item in foodArray)
 
     console.log("advanceGame")
+    }
 }
 
