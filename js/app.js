@@ -75,7 +75,7 @@ boardNodeList[0].remove()
 function init() {
     snakeArray = [1024, 1025, 1026]
     direction = 1
-    timeLeft = 5
+    timeLeft = 200
     numFood = 10
     foodArray = []
     speed = 0.8
@@ -83,10 +83,11 @@ function init() {
     makeFoodArray()
 }
 
-init()
+// init()
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
 playBtn.onclick = function() {
+    init()
     // console.log("hi")
     timer = setInterval(function() {
         // console.log("hey")
@@ -97,7 +98,7 @@ playBtn.onclick = function() {
             console.log("clearInterval")
             clearInterval(timer)
         }
-        }, 1000)
+        }, 200)
 }
 
 
