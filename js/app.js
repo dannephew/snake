@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, foodArray, food, timeLeft, speed, obstacle, wall, boardLength, tick, numFood, direction
+let snakeArray, foodArray, food, timeLeft, speed, obstacle, wall, boardLength, tick, numFood, numObstacles, obstaclesArray, direction
 
 /*------------------------ Cached Element References ------------------------*/
 // console.log("segment", segment)
@@ -52,8 +52,8 @@ function createBoard() {
         // console.log(i)
         // square.id = `${i}`
         square.setAttribute("id",  id)
-        //get number labels:
-        // square.innerText = id
+        //show number labels:
+        square.innerText = id
         emptyBoard.appendChild(square)
         // console.log(emptyBoard)
     }
@@ -73,33 +73,40 @@ boardNodeList[0].remove()
 // console.log(boardNodeList)
 
 function init() {
-    snakeArray = [1024, 1025, 1026]
+    snakeArray = [1024]
     direction = 1
     timeLeft = 200
     numFood = 10
+    numObstacles = []
+    obstaclesArray = []
     foodArray = []
     speed = 0.8
+    getNumObstacles()
     renderSnake()
     makeFoodArray()
+    makeObstaclesArray()
 }
 
-// init()
+
+init()
+console.log(numObstacles)
+
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
-playBtn.onclick = function() {
-    init()
-    // console.log("hi")
-    timer = setInterval(function() {
-        // console.log("hey")
-        timeLeft -= 1
-        console.log(timeLeft)
-        advanceGame()
-        if (timeLeft <= 0) {
-            console.log("clearInterval")
-            clearInterval(timer)
-        }
-        }, 200)
-}
+// playBtn.onclick = function() {
+//     init()
+//     // console.log("hi")
+//     timer = setInterval(function() {
+//         // console.log("hey")
+//         timeLeft -= 1
+//         console.log(timeLeft)
+//         advanceGame()
+//         if (timeLeft <= 0) {
+//             console.log("clearInterval")
+//             clearInterval(timer)
+//         }
+//         }, 200)
+// }
 
 
 
@@ -125,6 +132,14 @@ playBtn.onclick = function() {
 // }
 
 //for every coordinate in the snakeArray, renders it as a snake on the board
+function getNumObstacles() {
+    let min = 6
+    let max = 11
+    numObstacles = Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+console.log("numobstacles", numObstacles)
+
 function renderSnake() {
     // for (i=0; i < snakeArray.length; i++) {
     //     // console.log()
@@ -280,3 +295,53 @@ function advanceGame() {
     }
 }
 
+//makeObstaclesArray
+function makeObstaclesArray() {
+    for (i=0; i<numObstacles; i++) {
+        num = Math.floor(Math.random() * 2000)
+        while (snakeArray.includes(num) || num%50 == 24) {
+            num = Math.floor(Math.random() * 2000)
+        }
+        obstaclesArray.push(num)
+    }
+    renderObstaclesArray()
+}
+
+//The makeObstacles function: 
+//Create columns of obstacles and rows of obstacles 
+//columns: find a random num, then add (random num between 2 and 5) coordinates +- 50 to the array 
+    //if num is <= 249 OR >=1750: 
+        //if last row and first row: 
+        //stop
+    //just add coordinates until we reach the edge 
+        //if newly added coordinate is between 0 and 49 OR if num is between 1950 and 1999, stop
+        //if newly added coordinate is +- 50 from another obstalce, stop
+
+//rows: find a random num, then add (random num between 2 and 5) coordinates +- 1 to the array
+    //if num is on the edge of board
+        // if num%50 >= 45 && num%50 <= 49: 
+            // check if I need to create border case inside if statement or outside
+            //just add coordinates until we reach the edge 
+            //if newly added coordinate %50 == 0 OR coordinate %50 == 49, stop
+        //if num%50 >= 0 && num%50 <= 4: 
+            //just add coordinates until we reach the edge 
+            //if newly added coordinate %50 == 0 OR coordinate %50 == 49, stop
+    //if newly added coordinate is +- 1 from another obstacle, stop
+
+
+
+
+
+
+//renderObstacles
+function renderObstaclesArray() {
+    obstaclesArray.forEach(function (coordinate) {
+        let obstacle = document.createElement("div")
+        obstacle.setAttribute("id", "obstacle")
+        boardNodeList[coordinate].appendChild(obstacle)
+    })
+}
+//gameOver
+function gameOver() {
+
+}
