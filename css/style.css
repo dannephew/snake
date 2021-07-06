@@ -4,8 +4,8 @@ body {
 }
 .grid {
     background-color: black;
-    width: 1000px;
-    height: 800px;
+    width: 900px;
+    height: 720px;
     border: 1px solid red;
     margin: 0 auto;
     display: flex;
@@ -16,8 +16,8 @@ body {
   }
   
   .grid div {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     /* border:0.1px whitesmoke solid; */
     box-sizing:border-box
   }
