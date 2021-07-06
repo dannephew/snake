@@ -22,19 +22,19 @@ function logKey(e) {
     //get key attribute of e
     switch(key) {
         case "ArrowUp": 
-            console.log("up")
+            // console.log("up")
             direction = 1
             break
         case "ArrowDown":
-            console.log("down")
+            // console.log("down")
             direction = 2
             break
         case "ArrowLeft":
-            console.log("left")
+            // console.log("left")
             direction = 3
             break
         case "ArrowRight":
-            console.log("right")
+            // console.log("right")
             direction = 4
             break
     }
@@ -74,7 +74,7 @@ boardNodeList[0].remove()
 function init() {
     snakeArray = [1024, 1025, 1026]
     direction = 1
-    timeLeft = 3
+    timeLeft = 10
     numFood = 10
     foodArray = []
     speed = 0.8
@@ -86,9 +86,9 @@ init()
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
 playBtn.onclick = function() {
-    console.log("hi")
+    // console.log("hi")
     timer = setInterval(function() {
-        console.log("hey")
+        // console.log("hey")
         timeLeft -= 1
         console.log(timeLeft)
         advanceGame()
@@ -184,6 +184,23 @@ function renderFoodArray() {
     //if snake eats: gain a segment 
 //checks if new snake coordinate bumps into food 
 function advanceGame() {
+    // console.log("advance game called")
+    if (!foodArray.includes(snakeArray[0])) {
+        switch(direction) {
+            //check if there should be quotation marks around numbers
+            case 1: 
+                console.log("up")
+                break
+            case 2: 
+                console.log("down")
+                break
+            case 3:
+                console.log("left")
+                break
+            case 4:
+                console.log("right")
+                break
+        }
     if (foodArray.includes(snakeArray[0])) {
         switch(direction) {
             //check if there should be quotation marks around numbers
@@ -193,30 +210,14 @@ function advanceGame() {
             case 2: 
                 console.log("down")
                 break
-            case "3":
+            case 3:
                 console.log("left")
                 break
-            case "4":
+            case 4:
                 console.log("right")
                 break
         }
     }
-    if (!foodArray.includes(snakeArray[0])) {
-        switch(direction) {
-            //check if there should be quotation marks around numbers
-            case "1": 
-                console.log("up")
-                break
-            case "2": 
-                console.log("down")
-                break
-            case "3":
-                console.log("left")
-                break
-            case "4":
-                console.log("right")
-                break
-        }
 
     console.log("advanceGame")
     }
