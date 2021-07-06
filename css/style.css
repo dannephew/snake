@@ -1,5 +1,6 @@
 body {
     background-color: rgb(147, 253, 253);
+    color: white;
 }
 .grid {
     background-color: black;
@@ -32,10 +33,10 @@ body {
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
     display: inline-block;
-    box-shadow:
+    /* box-shadow:
     0 0 20px 3px #fff,  /* inner white */
     0 0 20px 6px #f0f, /* middle magenta */
-    0 0 10px 9px #0ff; /* outer cyan */
+    0 0 10px 9px #0ff; outer cyan */
 
   }
 

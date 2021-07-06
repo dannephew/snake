@@ -52,6 +52,7 @@ function createBoard() {
         // console.log(i)
         // square.id = `${i}`
         square.setAttribute("id",  id)
+        //get number labels:
         // square.innerText = id
         emptyBoard.appendChild(square)
         // console.log(emptyBoard)
@@ -74,7 +75,7 @@ boardNodeList[0].remove()
 function init() {
     snakeArray = [1024, 1025, 1026]
     direction = 1
-    timeLeft = 10
+    timeLeft = 5
     numFood = 10
     foodArray = []
     speed = 0.8
@@ -93,6 +94,7 @@ playBtn.onclick = function() {
         console.log(timeLeft)
         advanceGame()
         if (timeLeft <= 0) {
+            console.log("clearInterval")
             clearInterval(timer)
         }
         }, 1000)
@@ -124,18 +126,36 @@ playBtn.onclick = function() {
 //for every coordinate in the snakeArray, renders it as a snake on the board
 function renderSnake() {
     // for (i=0; i < snakeArray.length; i++) {
-
     //     // console.log()
     snakeArray.forEach(function (coordinate) {
         let segment = document.createElement("div")
         segment.setAttribute("id", "dot") 
         boardNodeList[coordinate].appendChild(segment)
+            //appending child is permanent 
         // console.log(boardNodeList)
         // console.log("hi")
         // console.log(boardNodeList)
     })
 }
 
+//The wipeSnake function: 
+//before renderSnake is called, the wipeSnake function wipes out the previous snake segements
+function wipeSnake() {
+    // console.log("wipeSnake called")
+    // console.log("segments", segments)
+    // console.log("segment DOM", boardNodeList)
+    snakeArray.forEach(function (coordinate) {
+        // let segment = document.querySelector("#dot")
+        while (boardNodeList[coordinate].firstChild)   {
+            boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+        }
+        // boardNodeList[coordinate].removeChild(segment)
+    })
+    // console.log("1024", boardNodeList[1024].childNodes)
+    // .removeChild(segments)
+    // console.log("segment DOM after", boardNodeList)
+
+}
 //The makeFoodArray function: 
 //Creates an array of food positions for numFood amounts of food onto random coordinates of the board
 //If random num is the initial position of snake, then num will be set as last coordinate on board
@@ -189,37 +209,73 @@ function advanceGame() {
         switch(direction) {
             //check if there should be quotation marks around numbers
             case 1: 
+                wipeSnake()
                 console.log("up")
+                snakeArray.unshift(snakeArray[0]-50)
+                snakeArray.pop()
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 2: 
+                wipeSnake()
                 console.log("down")
+                snakeArray.unshift(snakeArray[0]+50)
+                snakeArray.pop()
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 3:
+                wipeSnake()
                 console.log("left")
+                snakeArray.unshift(snakeArray[0]-1)
+                snakeArray.pop()
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 4:
+                wipeSnake()
                 console.log("right")
+                snakeArray.unshift(snakeArray[0]+1)
+                snakeArray.pop()
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
         }
     if (foodArray.includes(snakeArray[0])) {
         switch(direction) {
             //check if there should be quotation marks around numbers
             case 1: 
+                wipeSnake()
                 console.log("up")
+                snakeArray.unshift(snakeArray[0]-50)
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 2: 
                 console.log("down")
+                wipeSnake()
+                snakeArray.unshift(snakeArray[0]+50)
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 3:
                 console.log("left")
+                wipeSnake()
+                snakeArray.unshift(snakeArray[0]-1)
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
             case 4:
                 console.log("right")
+                wipeSnake()
+                snakeArray.unshift(snakeArray[0]+1)
+                console.log("snakeArray", snakeArray)
+                renderSnake()
                 break
         }
     }
 
-    console.log("advanceGame")
+    // console.log("advanceGame")
     }
 }
 
