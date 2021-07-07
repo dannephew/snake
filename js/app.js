@@ -515,5 +515,11 @@ function gameOver() {
 //The playerWin function: 
 
 function playerWin() {
-    console.log("playerWin")
+    if (foodArray.length == 0) {
+        timeLeft = 0
+        gameResult.textContent = "You Win!"
+    }
 }
+
+let a = []
+console.log("a", a.length)
