@@ -1,3 +1,7 @@
+//1. display one player, two players page
+//2. display instructions with play button
+//3. display 
+
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -119,9 +123,9 @@ playBtn.onclick = function() {
 //------------------------------------------------------------------------
 
 resetBtn.onclick = function() {
+    gameResult.textContent = ""
     wipeSnake()
-    wipeFood()
-    wipeObstacles()
+    wipeBoard()
 }
 
 
@@ -217,25 +221,32 @@ function wipeSnake() {
     // console.log("segment DOM after", boardNodeList)
 }
 
-function wipeFood() {
-    foodArray.forEach(function (coordinate) {
-        // let segment = document.querySelector("#dot")
-        while (boardNodeList[coordinate].firstChild)   {
-            boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+function wipeBoard() {
+    for (i=0; i<=1999; i++) {
+        while (boardNodeList[i].firstChild)   {
+            boardNodeList[i].removeChild(boardNodeList[i].lastChild)
         }
-        // boardNodeList[coordinate].removeChild(segment)
-    })
+    }
 }
+// function wipeFood() {
+//     foodArray.forEach(function (coordinate) {
+//         // let segment = document.querySelector("#dot")
+//         while (boardNodeList[coordinate].firstChild)   {
+//             boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+//         }
+//         // boardNodeList[coordinate].removeChild(segment)
+//     })
+// }
 
-function wipeObstacles() {
-    colObstaclesArray.forEach(function (coordinate) {
-        // let segment = document.querySelector("#dot")
-        while (boardNodeList[coordinate].firstChild)   {
-            boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
-        }
-        // boardNodeList[coordinate].removeChild(segment)
-    })
-}
+// function wipeObstacles() {
+//     colObstaclesArray.forEach(function (coordinate) {
+//         // let segment = document.querySelector("#dot")
+//         while (boardNodeList[coordinate].firstChild)   {
+//             boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+//         }
+//         // boardNodeList[coordinate].removeChild(segment)
+//     })
+// }
 
 //The makeFoodArray function: 
 //Creates an array of food positions for numFood amounts of food onto random coordinates of the board
