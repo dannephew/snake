@@ -1,6 +1,8 @@
 //1. display one player, two players page
 //2. display instructions with play button
-//3. display 
+//3. display snake game
+//4. upon losing, display lose page with main menu button
+//5. upon winning, display win page with main menu button
 
 /*-------------------------------- Constants --------------------------------*/
 
