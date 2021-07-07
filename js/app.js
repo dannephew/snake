@@ -84,7 +84,7 @@ function init() {
     rowObstaclesArray = []
     foodArray = []
     speed = 0.8
-    getBorderArray()
+    makeBorderArray()
     getNumObstacles()
     makeFoodArray()
     renderSnake()
@@ -92,6 +92,7 @@ function init() {
     gameOver()
 } 
 
+// console.log(borderArray)
 
 // init()
 // console.log(numObstacles)
@@ -147,17 +148,38 @@ resetBtn.onclick = function() {
 
 
 
-function getBorderArray() {
-    console.log("getBorderArray")
+function makeBorderArray() {
+    console.log("makeBorderArray")
+    for (i=0; i <= 49; i++) {
+        borderArray.push(i)
+    }
+    for (i=1950; i<=1999; i++) {
+        borderArray.push(i)
+    }
+    for (i=50; i<=1949; i++) {
+        if (i%50 == 0 || i%50 == 49) {
+            borderArray.push(i)
+        }
+    }
+    // console.log("borderarray", borderArray)
+    renderBorderArray()
+}
+
+function renderBorderArray() {
+    borderArray.forEach(function (coordinate) {
+        let wall = document.createElement("div")
+        wall.setAttribute("id", "border") 
+        boardNodeList[coordinate].appendChild(wall)
+})
 }
 
 function getNumObstacles() {
     let min = 15
     let max = 20
     numObstacles = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("numObstacles", numObstacles)
 }
 
-console.log("numobstacles", numObstacles)
 
 
 //The renderSnake function: 
@@ -175,6 +197,7 @@ function renderSnake() {
         // console.log(boardNodeList)
     })
 }
+
 
 //The wipeSnake function: 
 //before renderSnake is called, the wipeSnake function wipes out the previous snake segements
@@ -218,10 +241,12 @@ function wipeObstacles() {
 //Creates an array of food positions for numFood amounts of food onto random coordinates of the board
 //If random num is the initial position of snake, then num will be set as last coordinate on board
 function makeFoodArray() {
+    let min = 50
+    let max = 1949
     for (i=0; i<numFood; i++) {
-        num = Math.floor(Math.random() * 2000)
-        while (snakeArray.includes(num)) {
-            num = Math.floor(Math.random() * 2000)
+        num = Math.floor(Math.random() * (max - min + 1) + min)
+        while (snakeArray.includes(num) || borderArray.includes(num) || colObstaclesArray.includes(num)) {
+            num = Math.floor(Math.random() * (max - min + 1) + min)
         }
         foodArray.push(num)
     }
@@ -356,18 +381,21 @@ function makeObstaclesArrays() {
     //     }
     //     obstaclesArray.push(num)
     // }
-    // let numCols = Math.floor(Math.random() * numObstacles)
-    let numCols = numObstacles
-    // console.log("numCols", numCols)
-    // let numRows = numObstacles - numCols
+    // let numObstacles = Math.floor(Math.random() * numObstacles)
+    // console.log("numObstacles", numObstacles)
+    // let numRows = numObstacles - numObstacles
     //Columns: 
-    for (i=0; i<numCols; i++) {
-        colCoord = Math.floor(Math.random() * 2000)
-        while (snakeArray.includes(colCoord) || colObstaclesArray.includes(colCoord) || rowObstaclesArray.includes(colCoord) || foodArray.includes(colCoord)) {
-            colCoord = Math.floor(Math.random() * 2000)
+    console.log("numObstacles", numObstacles)
+    for (i=0; i<numObstacles; i++) {
+        let min = 50
+        let max = 1949
+        let colCoord = Math.floor(Math.random() * (max - min + 1) + min)
+        while (snakeArray.includes(colCoord) || colObstaclesArray.includes(colCoord) || rowObstaclesArray.includes(colCoord) || foodArray.includes(colCoord) || borderArray.includes(colCoord)) {
+            colCoord = Math.floor(Math.random() * (max - min + 1) + min)
         }
         colObstaclesArray.push(colCoord) 
     }
+    console.log("after for loop", colObstaclesArray)
     colObstaclesArray.forEach(function (coordinate) {
         let min = 2
         let max = 5
@@ -380,7 +408,7 @@ function makeObstaclesArrays() {
             //how to make coordinate equal to 
         for (i = 0; i < numCoords; i++) {
             // console.log("for loop plus")
-            if (nextCoordPlus >= 0 && nextCoordPlus <= 1999 && !snakeArray.includes(nextCoordPlus) && !colObstaclesArray.includes(nextCoordPlus) && !rowObstaclesArray.includes(nextCoordPlus) && !foodArray.includes(nextCoordPlus)) {
+            if (nextCoordPlus >= 50 && nextCoordPlus <= 1949 && !snakeArray.includes(nextCoordPlus) && !colObstaclesArray.includes(nextCoordPlus) && !rowObstaclesArray.includes(nextCoordPlus) && !foodArray.includes(nextCoordPlus) && !borderArray.includes(nextCoordPlus)) {
                 colObstaclesArray.push(nextCoordPlus)
                 // nextCoordPlus50 *= -1
                 nextCoordPlus += 50
@@ -392,7 +420,7 @@ function makeObstaclesArrays() {
         }
         for (i = 0; i < numCoords; i++) {
             // console.log("for loop minus")
-            if (nextCoordMinus >= 0 && nextCoordMinus <= 1999 && !snakeArray.includes(nextCoordMinus) && !colObstaclesArray.includes(nextCoordMinus) && !rowObstaclesArray.includes(nextCoordMinus) && !foodArray.includes(nextCoordMinus)) {
+            if (nextCoordMinus >= 50 && nextCoordMinus <= 1949 && !snakeArray.includes(nextCoordMinus) && !colObstaclesArray.includes(nextCoordMinus) && !rowObstaclesArray.includes(nextCoordMinus) && !foodArray.includes(nextCoordMinus) && !borderArray.includes(nextCoordPlus)) {
                 colObstaclesArray.push(nextCoordMinus)
                 nextCoordMinus -= 50
                 // console.log(colObstaclesArray)
@@ -403,6 +431,7 @@ function makeObstaclesArrays() {
     // console.log(colObstaclesArray)
     }
 })
+console.log("obstacles array", colObstaclesArray)
 renderObstaclesArray()
 }
 //------------
@@ -460,6 +489,14 @@ function gameOver() {
             gameResult.textContent = "Game Over!"
         }
     })
+    let checkSelfCollision = snakeArray.slice()
+    checkSelfCollision.shift()
+    // console.log("checkSelfCollision", checkSelfCollision)
+    // console.log("snakeArray", snakeArray)
+    if (checkSelfCollision.includes(snakeArray[0])) {
+        timeLeft = 0
+        gameResult.textContent = "Game Over!"
+    }
 } 
 
 //The playerWin function: 
