@@ -1,6 +1,6 @@
 body {
     background-color: rgb(147, 253, 253);
-    color: white;
+    color: blue;
 }
 .grid {
     background-color: black;
@@ -56,4 +56,36 @@ body {
     0 0 20px 3px #fff,  /* inner white */
     0 0 20px 6px #f0f, /* middle magenta */
     0 0 10px 9px #0ff; /*outer cyan */
+  }
+
+  .main-page {
+    background-color: white;
+    border: 1px solid red;
+    padding: 100px;
+    text-align: center;
+  }
+
+  .instructions-1 {
+    background-color: white;
+    border: 1px solid red;
+    padding: 100px 100px 100px 800px;
+    /* text-align: center; */
+
+  }
+
+.game-1 {
+  text-align: center;
+}
+
+  .result-1 {
+    background-color: white;
+    border: 1px solid red;
+    padding: 100px;
+    position: absolute;
+    text-align: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* position: static; */
+    z-index: 99 !important;
+
   }
