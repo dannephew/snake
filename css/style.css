@@ -1,7 +1,8 @@
 body {
-    background-color: rgb(147, 253, 253);
+    background-color: black;
     color: red;
     text-align: center;
+    /* position: relative; */
 }
 .grid {
     background-color: black;
@@ -66,11 +67,23 @@ body {
   }
 
   .main-page {
-    background-color: white;
+    background-color: black;
     border: 1px solid red;
     padding: 100px;
     border-radius: 15px;
     text-align: center;
+    /* display: block; */
+  }
+
+  #snake-body-pic {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+  }
+
+  #snake-pic {
+    display: block;
+    margin: 0 auto;
   }
 
   .instructions-1 {
