@@ -16,19 +16,26 @@
         <button type="button" class="two-player">Two Players</button>
     </section>
 
-    <section class="instructions-1" >
-        <h1>How to Play</h1>
-        <ol>
-            <li>Move snake with arrow keys</li>
-            <li>Eat all food to gain length and win</li>
-            <li>Avoid colliding into obstacles or board borders!</li>
-        </ol>
-        <button id="go-to-game-1">Next</button>
-    </section>
-
     <section class = "game-1">
         <h1>Snake</h1>
         <!-- <h2 id="game-result"></h2> -->
+        <span class="instructions-1" >
+            <h1>How to Play</h1>
+            <ol>
+                <li>Move snake with arrow keys</li>
+                <li>Eat all food to gain length and win</li>
+                <li>Avoid colliding into obstacles or board borders!</li>
+            </ol>
+            <button id="go-to-game-1">Next</button>
+        </span>
+
+        <div class="result-1">
+            <!-- <h1>Result:</h1> -->
+            <h1 id="game-result"></h1>
+            <!-- <button id = "play-game">Play Game</button> -->
+            <button id="reset-button" value="reset" hidden>Main Page</button>
+        </div>
+        
         <h3 id="time"></h3>
         <!-- <canvas id="gameCanvas" width="400" height="400"><canvas> -->
         <section class="grid">
@@ -41,14 +48,10 @@
             <button id = "play-game">Play Game</button>
             <!-- <button id="reset-button" value="reset" hidden>Reset</button> -->
         <!-- </form>   -->
+
     </section>
 
-    <section class="result-1">
-        <h1>Result:</h1>
-        <h1 id="game-result"></h1>
-        <!-- <button id = "play-game">Play Game</button> -->
-        <button id="reset-button" value="reset" hidden>Main Page</button>
-    </section>
+
 
 </body> 
 </html>

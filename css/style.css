@@ -1,6 +1,7 @@
 body {
     background-color: rgb(147, 253, 253);
     color: blue;
+    text-align: center;
 }
 .grid {
     background-color: black;
@@ -12,13 +13,17 @@ body {
     flex-wrap: wrap;
     font-size: 8px;
     /* padding: 20px; */
+    /* position: relative; */
+    z-index: 5;
+    /* top: 50%;
+    left: 50%; */
   }
   
   .grid div {
     width: 18px;
     height: 18px;
     /* border:0.1px whitesmoke solid; */
-    box-sizing:border-box
+    box-sizing:border-box;
   }
 
   /* #play-game {
@@ -46,8 +51,8 @@ body {
   }
 
   #dot {
-    height: 7.5px;
-    width: 7.5px;
+    height: 5px;
+    width: 5px;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
@@ -56,6 +61,8 @@ body {
     0 0 20px 3px #fff,  /* inner white */
     0 0 20px 6px #f0f, /* middle magenta */
     0 0 10px 9px #0ff; /*outer cyan */
+    z-index: 99 !important;
+
   }
 
   .main-page {
@@ -66,26 +73,43 @@ body {
   }
 
   .instructions-1 {
-    background-color: white;
+    background-color: yellow;
     border: 1px solid red;
-    padding: 100px 100px 100px 800px;
+    padding: 0 20px 0 0;
     /* text-align: center; */
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
+  ul{
+    text-align: center;
+    list-style-position: inside;
   }
 
 .game-1 {
   text-align: center;
+  background-color: white;
+  border: 1px solid red;
+  padding: 100px 100px 100px 100px;
+  position: relative;
 }
 
   .result-1 {
-    background-color: white;
+    width: 50px;
+    height: 50px;
+    background-color: green;
     border: 1px solid red;
-    padding: 100px;
+    /* padding: 500px; */
     position: absolute;
-    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     /* display: flex; */
     /* justify-content: center; */
     /* position: static; */
-    z-index: 99 !important;
+    /* z-index: 99 !important; */
 
   }
