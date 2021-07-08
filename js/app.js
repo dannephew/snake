@@ -85,7 +85,7 @@ function init() {
     snakeArray = [1024]
     direction = 1
     timeLeft = 200
-    numFood = 10
+    numFood = 1
     colObstaclesArray = []
     rowObstaclesArray = []
     foodArray = []
@@ -125,6 +125,7 @@ playBtn.onclick = function() {
 //------------------------------------------------------------------------
 
 resetBtn.onclick = function() {
+    timeLeft = 0
     gameResult.textContent = ""
     wipeSnake()
     wipeBoard()
@@ -342,6 +343,11 @@ function advanceGame() {
             }
         }  
         if (foodArray.includes(snakeArray[0])) {
+            let index = foodArray.indexOf(snakeArray[0])
+            // console.log("index", index)
+            if (index>-1) {
+                foodArray.splice(index, 1)
+            }
             // while (boardNodeList[snakeArray[0]].firstChild)   {
             //     boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
             // }     
@@ -515,11 +521,12 @@ function gameOver() {
 //The playerWin function: 
 
 function playerWin() {
+    console.log("food length: ", foodArray.length)
     if (foodArray.length == 0) {
         timeLeft = 0
         gameResult.textContent = "You Win!"
     }
 }
 
-let a = []
-console.log("a", a.length)
+// let a = []
+// console.log("a", a.length)
