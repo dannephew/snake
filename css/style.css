@@ -17,7 +17,7 @@ body {
   .grid div {
     width: 18px;
     height: 18px;
-    /* border:0.1px whitesmoke solid; */
+    border:0.1px whitesmoke solid;
     box-sizing:border-box
   }
 
@@ -27,15 +27,16 @@ body {
    */
 
    #dot {
-    height: 5px;
-    width: 5px;
+    height: 7.5px;
+    width: 7.5px;
+    text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
     display: inline-block;
-    /* box-shadow:
+    box-shadow:
     0 0 20px 3px #fff,  /* inner white */
     0 0 20px 6px #f0f, /* middle magenta */
-    0 0 10px 9px #0ff; /*outer cyan */*/
+    0 0 10px 9px #0ff; /*outer cyan */
   }
 
   #food {

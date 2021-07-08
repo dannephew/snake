@@ -85,7 +85,7 @@ function init() {
     snakeArray = [1024]
     direction = 1
     timeLeft = 200
-    numFood = 1
+    numFood = 10
     colObstaclesArray = []
     rowObstaclesArray = []
     foodArray = []

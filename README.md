@@ -31,3 +31,4 @@ HTML, Javascript, CSS
 * Anything can be coded if I put in the time and effort
 * Pseudocode is highly important to avoid going backwards and editing code when a new function is added
 * Hard coding of any kind should be avoided. For instance, writing in the specific board length and width into functions makes it hard to add multiple levels that change in difficulty as the board length and width increase. 
+
