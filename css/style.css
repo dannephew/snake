@@ -1,6 +1,6 @@
 body {
     background-color: rgb(147, 253, 253);
-    color: blue;
+    color: red;
     text-align: center;
 }
 .grid {
@@ -69,19 +69,29 @@ body {
     background-color: white;
     border: 1px solid red;
     padding: 100px;
+    border-radius: 15px;
     text-align: center;
   }
 
   .instructions-1 {
     background-color: yellow;
     border: 1px solid red;
-    padding: 0 20px 0 0;
+    padding: 0 20px 10px 0;
+    /* padding: 100px;  */
     /* text-align: center; */
     display: inline-block;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 99;
+  }
+
+  #go-to-game-1 {
+    /* text-align: center; */
+    /* padding: 10px 0 0 0; */
+    margin-left: 15px; 
   }
 
   ul{
@@ -91,15 +101,18 @@ body {
 
 .game-1 {
   text-align: center;
-  background-color: white;
+  background-color: rgb(9, 65, 13);
   border: 1px solid red;
   padding: 100px 100px 100px 100px;
   position: relative;
+  border-radius: 15px;
 }
 
   .result-1 {
-    width: 50px;
-    height: 50px;
+    border-radius: 15px;
+    /* width: 50px;
+    height: 50px; */
+    padding: 100px; 
     background-color: green;
     border: 1px solid red;
     /* padding: 500px; */
