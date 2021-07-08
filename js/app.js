@@ -1,7 +1,13 @@
+//1. display one player, two players page
+//2. display instructions with play button
+//3. display snake game
+//4. upon losing, display lose page with main menu button
+//5. upon winning, display win page with main menu button
+
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, foodArray, food, timeLeft, speed, obstacle, wall, boardLength, tick, numFood, numObstacles, colObstaclesArray, rowObstaclesArray, direction
+let snakeArray, foodArray, borderArray, food, timeLeft, speed, obstacle, wall, boardLength, boardWidth, squareLength, tick, numFood, numObstacles, colObstaclesArray, rowObstaclesArray, direction
 
 /*------------------------ Cached Element References ------------------------*/
 // console.log("segment", segment)
@@ -9,6 +15,7 @@ const emptyBoard = document.querySelector(".grid")
 const gameResult = document.querySelector("#game-result")
 const time = document.querySelector("#time")
 const resetBtn = document.querySelector("#reset-button")
+console.log(resetBtn)
 const playBtn = document.querySelector("#play-game")
 console.log(playBtn)
 
@@ -73,14 +80,17 @@ boardNodeList[0].remove()
 // console.log(boardNodeList)
 
 function init() {
+    // resetBtn.setAttribute("hidden", true)
+    borderArray=[]
     snakeArray = [1024]
     direction = 1
     timeLeft = 200
-    numFood = 10
+    numFood = 1
     colObstaclesArray = []
     rowObstaclesArray = []
     foodArray = []
     speed = 0.8
+    makeBorderArray()
     getNumObstacles()
     makeFoodArray()
     renderSnake()
@@ -88,6 +98,7 @@ function init() {
     gameOver()
 } 
 
+// console.log(borderArray)
 
 // init()
 // console.log(numObstacles)
@@ -97,6 +108,7 @@ function init() {
 //------------------------------------------------------------------------
 playBtn.onclick = function() {
     // wipeSnake()
+    resetBtn.removeAttribute("hidden")
     init()
     // console.log("hi")
     timer = setInterval(function() {
@@ -111,6 +123,13 @@ playBtn.onclick = function() {
         }, 200)
 }
 //------------------------------------------------------------------------
+
+resetBtn.onclick = function() {
+    timeLeft = 0
+    gameResult.textContent = ""
+    wipeSnake()
+    wipeBoard()
+}
 
 
 // let interval = setInterval(function() {
@@ -134,15 +153,44 @@ playBtn.onclick = function() {
 //     }
 // }
 
-//for every coordinate in the snakeArray, renders it as a snake on the board
-function getNumObstacles() {
-    let min = 10
-    let max = 15
-    numObstacles = Math.floor(Math.random() * (max - min + 1) + min)
+
+
+function makeBorderArray() {
+    console.log("makeBorderArray")
+    for (i=0; i <= 49; i++) {
+        borderArray.push(i)
+    }
+    for (i=1950; i<=1999; i++) {
+        borderArray.push(i)
+    }
+    for (i=50; i<=1949; i++) {
+        if (i%50 == 0 || i%50 == 49) {
+            borderArray.push(i)
+        }
+    }
+    // console.log("borderarray", borderArray)
+    renderBorderArray()
 }
 
-console.log("numobstacles", numObstacles)
+function renderBorderArray() {
+    borderArray.forEach(function (coordinate) {
+        let wall = document.createElement("div")
+        wall.setAttribute("id", "border") 
+        boardNodeList[coordinate].appendChild(wall)
+})
+}
 
+function getNumObstacles() {
+    let min = 15
+    let max = 20
+    numObstacles = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log("numObstacles", numObstacles)
+}
+
+
+
+//The renderSnake function: 
+//For every coordinate in the snakeArray, renders it as a snake on the board
 function renderSnake() {
     // for (i=0; i < snakeArray.length; i++) {
     //     // console.log()
@@ -156,6 +204,7 @@ function renderSnake() {
         // console.log(boardNodeList)
     })
 }
+
 
 //The wipeSnake function: 
 //before renderSnake is called, the wipeSnake function wipes out the previous snake segements
@@ -173,16 +222,45 @@ function wipeSnake() {
     // console.log("1024", boardNodeList[1024].childNodes)
     // .removeChild(segments)
     // console.log("segment DOM after", boardNodeList)
-
 }
+
+function wipeBoard() {
+    for (i=0; i<=1999; i++) {
+        while (boardNodeList[i].firstChild)   {
+            boardNodeList[i].removeChild(boardNodeList[i].lastChild)
+        }
+    }
+}
+// function wipeFood() {
+//     foodArray.forEach(function (coordinate) {
+//         // let segment = document.querySelector("#dot")
+//         while (boardNodeList[coordinate].firstChild)   {
+//             boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+//         }
+//         // boardNodeList[coordinate].removeChild(segment)
+//     })
+// }
+
+// function wipeObstacles() {
+//     colObstaclesArray.forEach(function (coordinate) {
+//         // let segment = document.querySelector("#dot")
+//         while (boardNodeList[coordinate].firstChild)   {
+//             boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
+//         }
+//         // boardNodeList[coordinate].removeChild(segment)
+//     })
+// }
+
 //The makeFoodArray function: 
 //Creates an array of food positions for numFood amounts of food onto random coordinates of the board
 //If random num is the initial position of snake, then num will be set as last coordinate on board
 function makeFoodArray() {
+    let min = 50
+    let max = 1949
     for (i=0; i<numFood; i++) {
-        num = Math.floor(Math.random() * 2000)
-        while (snakeArray.includes(num)) {
-            num = Math.floor(Math.random() * 2000)
+        num = Math.floor(Math.random() * (max - min + 1) + min)
+        while (snakeArray.includes(num) || borderArray.includes(num) || colObstaclesArray.includes(num)) {
+            num = Math.floor(Math.random() * (max - min + 1) + min)
         }
         foodArray.push(num)
     }
@@ -263,7 +341,13 @@ function advanceGame() {
                     renderSnake()
                     break
             }
-        } else if (foodArray.includes(snakeArray[0])) {
+        }  
+        if (foodArray.includes(snakeArray[0])) {
+            let index = foodArray.indexOf(snakeArray[0])
+            // console.log("index", index)
+            if (index>-1) {
+                foodArray.splice(index, 1)
+            }
             // while (boardNodeList[snakeArray[0]].firstChild)   {
             //     boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
             // }     
@@ -316,18 +400,21 @@ function makeObstaclesArrays() {
     //     }
     //     obstaclesArray.push(num)
     // }
-    // let numCols = Math.floor(Math.random() * numObstacles)
-    let numCols = numObstacles
-    // console.log("numCols", numCols)
-    // let numRows = numObstacles - numCols
+    // let numObstacles = Math.floor(Math.random() * numObstacles)
+    // console.log("numObstacles", numObstacles)
+    // let numRows = numObstacles - numObstacles
     //Columns: 
-    for (i=0; i<numCols; i++) {
-        colCoord = Math.floor(Math.random() * 2000)
-        while (snakeArray.includes(colCoord) || colObstaclesArray.includes(colCoord) || rowObstaclesArray.includes(colCoord) || foodArray.includes(colCoord)) {
-            colCoord = Math.floor(Math.random() * 2000)
+    console.log("numObstacles", numObstacles)
+    for (i=0; i<numObstacles; i++) {
+        let min = 50
+        let max = 1949
+        let colCoord = Math.floor(Math.random() * (max - min + 1) + min)
+        while (snakeArray.includes(colCoord) || colObstaclesArray.includes(colCoord) || rowObstaclesArray.includes(colCoord) || foodArray.includes(colCoord) || borderArray.includes(colCoord)) {
+            colCoord = Math.floor(Math.random() * (max - min + 1) + min)
         }
         colObstaclesArray.push(colCoord) 
     }
+    console.log("after for loop", colObstaclesArray)
     colObstaclesArray.forEach(function (coordinate) {
         let min = 2
         let max = 5
@@ -340,7 +427,7 @@ function makeObstaclesArrays() {
             //how to make coordinate equal to 
         for (i = 0; i < numCoords; i++) {
             // console.log("for loop plus")
-            if (nextCoordPlus >= 0 && nextCoordPlus <= 1999 && !snakeArray.includes(nextCoordPlus) && !colObstaclesArray.includes(nextCoordPlus) && !rowObstaclesArray.includes(nextCoordPlus) && !foodArray.includes(nextCoordPlus)) {
+            if (nextCoordPlus >= 50 && nextCoordPlus <= 1949 && !snakeArray.includes(nextCoordPlus) && !colObstaclesArray.includes(nextCoordPlus) && !rowObstaclesArray.includes(nextCoordPlus) && !foodArray.includes(nextCoordPlus) && !borderArray.includes(nextCoordPlus)) {
                 colObstaclesArray.push(nextCoordPlus)
                 // nextCoordPlus50 *= -1
                 nextCoordPlus += 50
@@ -352,7 +439,7 @@ function makeObstaclesArrays() {
         }
         for (i = 0; i < numCoords; i++) {
             // console.log("for loop minus")
-            if (nextCoordMinus >= 0 && nextCoordMinus <= 1999 && !snakeArray.includes(nextCoordMinus) && !colObstaclesArray.includes(nextCoordMinus) && !rowObstaclesArray.includes(nextCoordMinus) && !foodArray.includes(nextCoordMinus)) {
+            if (nextCoordMinus >= 50 && nextCoordMinus <= 1949 && !snakeArray.includes(nextCoordMinus) && !colObstaclesArray.includes(nextCoordMinus) && !rowObstaclesArray.includes(nextCoordMinus) && !foodArray.includes(nextCoordMinus) && !borderArray.includes(nextCoordPlus)) {
                 colObstaclesArray.push(nextCoordMinus)
                 nextCoordMinus -= 50
                 // console.log(colObstaclesArray)
@@ -363,6 +450,7 @@ function makeObstaclesArrays() {
     // console.log(colObstaclesArray)
     }
 })
+console.log("obstacles array", colObstaclesArray)
 renderObstaclesArray()
 }
 //------------
@@ -413,17 +501,32 @@ function renderObstaclesArray() {
 //The gameOver function: 
 //if any one of snake array coords is in colObstaclesArray or outside of board, then change gameResult
 function gameOver() {
+    console.log("gameOver function called")
     snakeArray.forEach(function(coordinate) {
-        if (colObstaclesArray.includes(coordinate)) {
+        if (colObstaclesArray.includes(coordinate) || borderArray.includes(coordinate)) {
             timeLeft = 0
             gameResult.textContent = "Game Over!"
         }
     })
-    console.log("gameOver")
-}
+    let checkSelfCollision = snakeArray.slice()
+    checkSelfCollision.shift()
+    // console.log("checkSelfCollision", checkSelfCollision)
+    // console.log("snakeArray", snakeArray)
+    if (checkSelfCollision.includes(snakeArray[0])) {
+        timeLeft = 0
+        gameResult.textContent = "Game Over!"
+    }
+} 
 
 //The playerWin function: 
 
 function playerWin() {
-    console.log("playerWin")
+    console.log("food length: ", foodArray.length)
+    if (foodArray.length == 0) {
+        timeLeft = 0
+        gameResult.textContent = "You Win!"
+    }
 }
+
+// let a = []
+// console.log("a", a.length)
