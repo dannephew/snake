@@ -28,55 +28,42 @@ const result2 = document.querySelector(".result-2")
 const goto2 = document.querySelector("#go-to-game-2")
 /*----------------------------- Event Listeners -----------------------------*/
 
+
 document.addEventListener("keydown", logKey)
 
 function logKey(e) {
-    // console.log("e", e)
-    // console.log("e.key", e.key)
     const key = e.key
-    //get key attribute of e
     switch(key) {
         case "ArrowUp": 
-            // console.log("up")
             direction = 1
             directionp1 = 1
             break
         case "ArrowDown":
-            // console.log("down")
             direction = 2
             directionp1 = 2
             break
         case "ArrowLeft":
-            // console.log("left")
             direction = 3
             directionp1 = 3
             break
         case "ArrowRight":
-            // console.log("right")
             direction = 4
             directionp1 = 4
             break
         case "w": 
-            // console.log("case w", e.key)
             directionp2 = 1
             break
         case "s": 
-        // console.log("case s", e.key)
             directionp2 = 2
             break
         case "a": 
-        // console.log("case a", e.key)
 
             directionp2 = 3
             break
         case "d": 
-        // console.log("case d", e.key)
-
             directionp2 = 4
             break
         case "W": 
-        // console.log("case w", e.key)
-
             directionp2 = 1
             break
         case "S": 
@@ -427,41 +414,38 @@ function disablePlayBtn() {
 
 
 /*-------------------------------- Two Player Functions --------------------------------*/
+
 function createBoard2() {
     for (i=0; i<2000; i++) {
         let square = document.createElement("div")
         let id = i
-        // console.log(i)
-        // square.id = `${i}`
         square.setAttribute("id",  id)
-        //show number labels:
-        // square.innerText = id
         emptyBoard2.appendChild(square)
-        // console.log(emptyBoard)
     }
 }
 
 createBoard2()
 
+
+
 boardNodeList2 = emptyBoard2.childNodes
 boardNodeList2[0].remove()
 
+
 function init2() {
-    // resetBtn.setAttribute("hidden", true)
     borderArray2=[]
     snakeArrayP1 = [986]
     snakeArrayP2 = [959]
     directionp1 = 1
     directionp2 = 1
     timeLeft2 = 2000000
-    numFood = 20
+    numFood2 = 50
     colObstaclesArray2 = []
     foodArray2 = []
     speed = 0.8
     gameEnd = false
     makeBorderArray2()
     getNumObstacles2()
-    // console.log("numobs", numObstacles2)
     makeFoodArray2()
     renderSnakeP1()
     renderSnakeP2()
@@ -469,13 +453,11 @@ function init2() {
     gameOver2()
 } 
 
+
 playBtn2.onclick = function() {
-    // wipeSnake()
     resetBtn2.removeAttribute("hidden")
     init2()
-    // console.log("hi")
     timer = setInterval(function() {
-        // console.log("hey")
         timeLeft2 -= 1
         console.log(timeLeft2)
         advanceGameP1()
@@ -496,40 +478,23 @@ resetBtn2.onclick = function() {
     wipeBoard2()
     game2.setAttribute("hidden", true)
     mainPage.removeAttribute("hidden")
-    // spacebar.removeAttribute("hidden")
 }
 
 function wipeSnakeP1() {
-    // console.log("wipeSnake called")
-    // console.log("segments", segments)
-    // console.log("segment DOM", boardNodeList)
     snakeArrayP1.forEach(function (coordinate) {
-        // let segment = document.querySelector("#dot")
         while (boardNodeList2[coordinate].firstChild)   {
             boardNodeList2[coordinate].removeChild(boardNodeList2[coordinate].lastChild)
         }
-        // boardNodeList[coordinate].removeChild(segment)
     })
-    // console.log("1024", boardNodeList[1024].childNodes)
-    // .removeChild(segments)
-    // console.log("segment DOM after", boardNodeList)
 }
 
 
 function wipeSnakeP2() {
-    // console.log("wipeSnake called")
-    // console.log("segments", segments)
-    // console.log("segment DOM", boardNodeList)
     snakeArrayP2.forEach(function (coordinate) {
-        // let segment = document.querySelector("#dot")
         while (boardNodeList2[coordinate].firstChild)   {
             boardNodeList2[coordinate].removeChild(boardNodeList2[coordinate].lastChild)
         }
-        // boardNodeList[coordinate].removeChild(segment)
     })
-    // console.log("1024", boardNodeList[1024].childNodes)
-    // .removeChild(segments)
-    // console.log("segment DOM after", boardNodeList)
 }
 
 
@@ -545,7 +510,6 @@ function getNumObstacles2() {
     let min = 15
     let max = 20
     numObstacles2 = Math.floor(Math.random() * (max - min + 1) + min)
-    // console.log("numObstacles", numObstacles)
 }
 
 function makeBorderArray2() {
@@ -561,7 +525,6 @@ function makeBorderArray2() {
             borderArray2.push(i)
         }
     }
-    // console.log("borderarray", borderArray)
     renderBorderArray2()
 }
 
@@ -577,14 +540,8 @@ function renderBorderArray2() {
 function makeFoodArray2() {
     let min = 50
     let max = 1949
-    for (i=0; i<numFood; i++) {
+    for (i=0; i<numFood2; i++) {
         num = Math.floor(Math.random() * (max - min + 1) + min)
-        console.log("snakeArrayP1", snakeArrayP1)
-        console.log("snakeArrayP2", snakeArrayP2)
-        console.log("border array", borderArray2)
-        console.log("obstalces array", colObstaclesArray2)
-        // console.log("borderarray", )
-
         while (snakeArrayP1.includes(num) || snakeArrayP2.includes(num) || borderArray2.includes(num) || colObstaclesArray2.includes(num)) {
             num = Math.floor(Math.random() * (max - min + 1) + min)
         }
@@ -592,11 +549,6 @@ function makeFoodArray2() {
     }
     renderFoodArray2()
 }
-// console.log(foodArray)
-
-
-// The renderFoodArray function:
-// renders foodArray onto the board
 
 function renderFoodArray2() {
     foodArray2.forEach(function (coordinate) {
@@ -606,50 +558,34 @@ function renderFoodArray2() {
     })
 }
 
-//The renderSnake function: 
-//For every coordinate in the snakeArray, renders it as a snake on the board
 function renderSnakeP1() {
-    // for (i=0; i < snakeArray.length; i++) {
-    //     // console.log()
     snakeArrayP1.forEach(function (coordinate) {
         let segment = document.createElement("div")
         segment.setAttribute("id", "dot") 
         boardNodeList2[coordinate].appendChild(segment)
-            //appending child is permanent 
-        // console.log(boardNodeList)
-        // console.log("hi")
-        // console.log(boardNodeList)
     })
 }
 
 function renderSnakeP2() {
-    // for (i=0; i < snakeArray.length; i++) {
-    //     // console.log()
     snakeArrayP2.forEach(function (coordinate) {
         let segment = document.createElement("div")
         segment.setAttribute("id", "dot2") 
         boardNodeList2[coordinate].appendChild(segment)
-            //appending child is permanent 
-        // console.log(boardNodeList)
-        // console.log("hi")
-        // console.log(boardNodeList)
     })
 }
 
+
 function advanceGameP1() {
-    // console.log("advance game called")
     if (colObstaclesArray2.includes(snakeArrayP1[0])) {
         gameOver2()
     } else if (!colObstaclesArray2.includes(snakeArrayP1[0])) {
         if (!foodArray2.includes(snakeArrayP1[0])) {
             switch(directionp1) {
-                //check if there should be quotation marks around numbers
                 case 1: 
                     wipeSnakeP1()
                     console.log("up")
                     snakeArrayP1.unshift(snakeArrayP1[0]-50)
                     snakeArrayP1.pop()
-                    // console.log("snakeArrayP1", snakeArrayP1)
                     renderSnakeP1()
                     break
                 case 2: 
@@ -680,41 +616,28 @@ function advanceGameP1() {
         }  
         if (foodArray2.includes(snakeArrayP1[0])) {
             let index = foodArray2.indexOf(snakeArrayP1[0])
-            // console.log("index", index)
             if (index>-1) {
                 foodArray2.splice(index, 1)
-            }
-            // while (boardNodeList[snakeArrayP1[0]].firstChild)   {
-            //     boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
-            // }     
+            }  
             switch(directionp1) {
-                //check if there should be quotation marks around numbers
                 case 1: 
-                    // console.log("up")
                     wipeSnakeP1()
                     snakeArrayP1.unshift(snakeArrayP1[0]-50)
-                    // console.log("snakeArrayP1", snakeArrayP1)
                     renderSnakeP1()
                     break
                 case 2: 
-                    // console.log("down")
                     wipeSnakeP1()
                     snakeArrayP1.unshift(snakeArrayP1[0]+50)
-                    // console.log("snakeArrayP1", snakeArrayP1)
                     renderSnakeP1()
                     break
                 case 3:
-                    // console.log("left")
                     wipeSnakeP1()
                     snakeArrayP1.unshift(snakeArrayP1[0]-1)
-                    // console.log("snakeArrayP1", snakeArrayP1)
                     renderSnakeP1()
                     break
                 case 4:
-                    // console.log("right")
                     wipeSnakeP1()
                     snakeArrayP1.unshift(snakeArrayP1[0]+1)
-                    // console.log("snakeArrayP1", snakeArrayP1)
                     renderSnakeP1()
                     break
             }
@@ -722,135 +645,75 @@ function advanceGameP1() {
     }
     gameOver2()
     playerWin2()
-    addFood()
-    // console.log("advanceGame")
 }
 
 function advanceGameP2() {
-    console.log("advanceGameP2 called")
-    // console.log("advance game called")
     if (colObstaclesArray2.includes(snakeArrayP2[0])) {
         gameOver2()
     } else if (!colObstaclesArray2.includes(snakeArrayP2[0])) {
         if (!foodArray2.includes(snakeArrayP2[0])) {
             switch(directionp2) {
-                //check if there should be quotation marks around numbers
                 case 1: 
-                    console.log("up")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]-50)
                     snakeArrayP2.pop()
-                    // console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2() 
                     break
                 case 2: 
-                    console.log("down")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]+50)
                     snakeArrayP2.pop()
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
                 case 3:
-                    console.log("left")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]-1)
                     snakeArrayP2.pop()
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
                 case 4:
-                    console.log("right") 
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]+1)
                     snakeArrayP2.pop()
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
             }
         }  
         if (foodArray2.includes(snakeArrayP2[0])) {
             let index = foodArray2.indexOf(snakeArrayP2[0])
-            // console.log("index", index)
             if (index>-1) {
                 foodArray2.splice(index, 1)
             }
-            // while (boardNodeList[snakeArrayP2[0]].firstChild)   {
-            //     boardNodeList[coordinate].removeChild(boardNodeList[coordinate].lastChild)
-            // }     
             switch(directionp2) {
-                //check if there should be quotation marks around numbers
                 case 1: 
                     wipeSnakeP2()
-                    console.log("up")
                     snakeArrayP2.unshift(snakeArrayP2[0]-50)
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
                 case 2: 
-                    console.log("down")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]+50)
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
                 case 3:
-                    console.log("left")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]-1)
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
                 case 4:
-                    console.log("right")
                     wipeSnakeP2()
                     snakeArrayP2.unshift(snakeArrayP2[0]+1)
-                    console.log("snakeArrayP2", snakeArrayP2)
                     renderSnakeP2()
                     break
             }
         }
     }
     gameOver2()
-    addFood()
     playerWin2()
-    // console.log("advanceGame")
 }
-
-function addFood() {
-    if (foodArray2.length !== numFood2) {
-        let min = 50
-        let max = 1949
-        let diff = numFood2 - foodArray2.length
-        for (i=0; i<diff; i++) {
-            num = Math.floor(Math.random() * (max - min + 1) + min)
-            while (snakeArrayP1.includes(num) || snakeArrayP2.includes(num) || borderArray2.includes(num) || colObstaclesArray2.includes(num)) {
-                num = Math.floor(Math.random() * (max - min + 1) + min)
-            }
-            foodArray2.push(num)
-        }
-    }
-    renderFoodArray2()
-
-}
-
 
 
 function makeObstaclesArrays2() {
-    // for (i=0; i<numObstacles; i++) {
-    //     num = Math.floor(Math.random() * 2000)
-    //     while (snakeArray.includes(num) || num%50 == 24) {
-    //         num = Math.floor(Math.random() * 2000)
-    //     }
-    //     obstaclesArray.push(num)
-    // }
-    // let numObstacles = Math.floor(Math.random() * numObstacles)
-    // console.log("numObstacles", numObstacles)
-    // let numRows = numObstacles - numObstacles
-    //Columns: 
-    // console.log("numObstacles", numObstacles)
-    // console.log("numobs", numObstacles2)
-    // console.log("obstacles")
     for (i=0; i<numObstacles2; i++) {
         let min = 50
         let max = 1949
@@ -860,48 +723,32 @@ function makeObstaclesArrays2() {
         }
         colObstaclesArray2.push(colCoord) 
     }
-    // console.log("after for loop", colObstaclesArray)
     colObstaclesArray2.forEach(function (coordinate) {
         let min = 2
         let max = 5
         let numCoords = Math.floor(Math.random() * (max - min + 1) + min)
-        // let nextCoordPlus50 = 50
-        //make Coord
-        // let coord = coordinate
         let nextCoordPlus = coordinate + 50
         let nextCoordMinus = coordinate - 50
-            //how to make coordinate equal to 
         for (i = 0; i < numCoords; i++) {
-            // console.log("for loop plus")
             if (nextCoordPlus >= 50 && nextCoordPlus <= 1949 && !snakeArrayP1.includes(nextCoordPlus) && !colObstaclesArray2.includes(nextCoordPlus) && !foodArray2.includes(nextCoordPlus) && !borderArray2.includes(nextCoordPlus) && !snakeArrayP2.includes(nextCoordPlus)) {
                 colObstaclesArray2.push(nextCoordPlus)
-                // nextCoordPlus50 *= -1
                 nextCoordPlus += 50
-                // console.log(colObstaclesArray)
             } else {
-                // console.log("plus else")
                 return
             }
         }
         for (i = 0; i < numCoords; i++) {
-            // console.log("for loop minus")
             if (nextCoordMinus >= 50 && nextCoordMinus <= 1949 && !snakeArrayP1.includes(nextCoordMinus) && !colObstaclesArray2.includes(nextCoordMinus) && !foodArray2.includes(nextCoordMinus) && !borderArray2.includes(nextCoordPlus) && !snakeArrayP2.includes(nextCoordMinus)) {
                 colObstaclesArray2.push(nextCoordMinus)
                 nextCoordMinus -= 50
-                // console.log(colObstaclesArray)
             } else {
-                // console.log("minus else")
                 return
             }
-    // console.log(colObstaclesArray)
     }
 })
-// console.log("obstacles array", colObstaclesArray)
 renderObstaclesArray2()
 }
-//------------
 
-//renderObstacles
 function renderObstaclesArray2() {
     colObstaclesArray2.forEach(function (coordinate) {
         let obstacle = document.createElement("div")
@@ -912,10 +759,7 @@ function renderObstaclesArray2() {
 
 
 
-//The gameOver function: 
-//if any one of snake array coords is in colObstaclesArray or outside of board, then change gameResult
 function gameOver2() {
-    console.log("gameOver function called")
     snakeArrayP1.forEach(function(coordinate) {
         if (colObstaclesArray2.includes(coordinate) || borderArray2.includes(coordinate)) {
             timeLeft2 = 0
@@ -936,8 +780,6 @@ function gameOver2() {
     checkSelfCollisionP1.shift()
     checkSelfCollisionP2.shift()
 
-    // console.log("checkSelfCollision", checkSelfCollision)
-    // console.log("snakeArray", snakeArray)
     if (checkSelfCollisionP1.includes(snakeArrayP1[0])) {
         timeLeft2 = 0
         gameResult2.textContent = "Player 2 Wins!"
@@ -949,14 +791,11 @@ function gameOver2() {
         gameEnd2 = true
     }
     // console.log("gameresult", typeof gameResult2.textContent)
-    console.log("gameresultdisplay", gameResult2.textContent)
     resultGame2()
 } 
 
 
 function playerWin2() {
-    // console.log("playerwin called")
-    // console.log("food length: ", foodArray.length)
     snakeArrayP1.forEach(function(coordinate) {
         if (snakeArrayP2.includes(coordinate)) {
           if (snakeArrayP1.length > snakeArrayP2.length) {
@@ -974,63 +813,37 @@ function playerWin2() {
           }
         }
     })
-    // console.log("gameresult2", typeof gameResult2.textContent)
-    console.log("gameresult2", gameResult2.textContent)
     resultGame2()
     disablePlayBtn2()
 }
 
-// // let a = []
-// // console.log("a", a.length)
 
 
 twoPlayerBtn.onclick = function() {
     game2.removeAttribute("hidden")
     mainPage.setAttribute("hidden", true)
-    // console.log("mainpage after click", mainPage)
-    // console.log("gameResult", gameResult.textContent)
     result2.setAttribute("hidden", true)
     instructions2.removeAttribute("style")
-    // instructions1.removeAttribute("display")
-    // instructions1.removeAttribute("hidden")
-    // instructions1.setAttribute("display", "inline-block")
-    // console.log("instructions2", instructions2)
     disablePlayBtn2()
-    // console.log("instructions is closed?", instructions2.hasAttribute("style"))
 }
 
 
-// console.log("goto1", goto1)
 goto2.onclick = function() {
-    // console.log("goto1 clicked")
     playBtn2.disabled = false
     console.log("playBtn2 disabled", playBtn2.disabled)
     instructions2.style.display = "none"
     instructions2.setAttribute("display", "none")
-    // instructions1.setAttribute("hidden", true)
-    // instructions1.setAttribute("width", "0px")
-    // instructions1.setAttribute("height", "0px")
-    // console.log("instructions after click", instructions1)
 }
 
-// console.log("gameResult", gameResult.textContent)
 function resultGame2() {
-    console.log("resultGame called")
-    console.log("gameEnd true?", gameEnd2)
     if (gameEnd2 == true) {
-        // console.log("gameResult", gameResult.textContent)
         result2.removeAttribute("hidden")
-        // console.log("result1 hidden", result1.hasAttribute("hidden"))
     }
 }
-// console.log("resultpage", result1)
-// console.log("result1 hidden", result1.hasAttribute("hidden"))
+
 
 function disablePlayBtn2() {
-    // console.log("is result hidden", result1.hasAttribute("hidden"))
-    // console.log("playbtn", playBtn)
     if (!result2.hasAttribute("hidden") || !instructions2.hasAttribute("style") || !mainPage.hasAttribute("hidden")) {
-        // console.log("playbtn.disabled", playBtn.disabled)
         playBtn2.disabled = true
     }
 }
