@@ -7,7 +7,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, foodArray, borderArray, food, timeLeft, speed, obstacle, wall, boardLength, boardWidth, squareLength, tick, numFood, numObstacles, colObstaclesArray, rowObstaclesArray, direction
+let snakeArray, foodArray, borderArray, food, timeLeft, speed, obstacle, wall, boardLength, boardWidth, squareLength, tick, numFood, numObstacles, colObstaclesArray, rowObstaclesArray, direction, gameEnd
 
 /*------------------------ Cached Element References ------------------------*/
 // console.log("segment", segment)
@@ -18,7 +18,13 @@ const resetBtn = document.querySelector("#reset-button")
 console.log(resetBtn)
 const playBtn = document.querySelector("#play-game")
 console.log(playBtn)
-
+const onePlayerBtn = document.querySelector("#one-player")
+// console.log(onePlayerBtn)
+const game1 = document.querySelector(".game-1")
+const instructions1 = document.querySelector(".instructions-1")
+console.log(instructions1)
+// gameResult.textContent= ""
+// console.log("gameResult", gameResult.textContent)
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener("keydown", logKey)
 
@@ -48,7 +54,7 @@ function logKey(e) {
 }
 
 
-/*-------------------------------- Functions --------------------------------*/
+/*-------------------------------- One Player Functions --------------------------------*/
 
 //The createBoard function: 
 //creates board with 2000 divs labelled with incrementing ids
@@ -90,6 +96,7 @@ function init() {
     rowObstaclesArray = []
     foodArray = []
     speed = 0.8
+    gameEnd = false
     makeBorderArray()
     getNumObstacles()
     makeFoodArray()
@@ -129,6 +136,8 @@ resetBtn.onclick = function() {
     gameResult.textContent = ""
     wipeSnake()
     wipeBoard()
+    game1.setAttribute("hidden", true)
+    mainPage.removeAttribute("hidden")
 }
 
 
@@ -506,6 +515,7 @@ function gameOver() {
         if (colObstaclesArray.includes(coordinate) || borderArray.includes(coordinate)) {
             timeLeft = 0
             gameResult.textContent = "Game Over!"
+            gameEnd = true
         }
     })
     let checkSelfCollision = snakeArray.slice()
@@ -515,18 +525,65 @@ function gameOver() {
     if (checkSelfCollision.includes(snakeArray[0])) {
         timeLeft = 0
         gameResult.textContent = "Game Over!"
+        gameEnd = true
     }
+    console.log("gameresult", typeof gameResult.textContent)
+    console.log("gameresult", gameResult.textContent)
+    result()
 } 
 
 //The playerWin function: 
-
+console.log("gameResult", gameResult.textContent)
 function playerWin() {
+    console.log("playerwin called")
     console.log("food length: ", foodArray.length)
     if (foodArray.length == 0) {
         timeLeft = 0
         gameResult.textContent = "You Win!"
+        gameEnd = true
     }
+    console.log("gameresult", typeof gameResult.textContent)
+    console.log("gameresult", gameResult.textContent)
+    result()
 }
 
 // let a = []
 // console.log("a", a.length)
+
+/*-------------------------------- Page Transition Functions --------------------------------*/
+const mainPage = document.querySelector(".main-page")
+const result1 = document.querySelector(".result-1")
+onePlayerBtn.onclick = function() {
+    game1.removeAttribute("hidden")
+    mainPage.setAttribute("hidden", true)
+    console.log("mainpage after click", mainPage)
+    console.log("gameResult", gameResult.textContent)
+    result1.setAttribute("hidden", true)
+    instructions1.removeAttribute("style")
+    // instructions1.removeAttribute("display")
+    // instructions1.removeAttribute("hidden")
+    // instructions1.setAttribute("display", "inline-block")
+    console.log("instructions1", instructions1)
+
+}
+
+
+const goto1 = document.querySelector("#go-to-game-1")
+console.log("goto1", goto1)
+goto1.onclick = function() {
+    console.log("goto1 clicked")
+    instructions1.style.display = "none"
+    instructions1.setAttribute("display", "none")
+    // instructions1.setAttribute("hidden", true)
+    // instructions1.setAttribute("width", "0px")
+    // instructions1.setAttribute("height", "0px")
+    console.log("instructions after click", instructions1)
+}
+
+// console.log("gameResult", gameResult.textContent)
+function result() {
+    if (gameEnd == true) {
+        // console.log("gameResult", gameResult.textContent)
+        result1.removeAttribute("hidden")
+    }
+}

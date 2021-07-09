@@ -14,16 +14,16 @@
         <!-- <img id="snake-body-pic" src="https://c4.wallpaperflare.com/wallpaper/539/547/814/python-4k-hd-desktop-background-wallpaper-preview.jpg" alt="Snake Pic"> -->
         <h1 id="heading">SNAKE</h1>
         <section id="main-page-sub">
-        <button type="button" class="player-btn">One Player</button>
+        <button type="button" class="player-btn" id="one-player">One Player</button>
         <img id="snake-pic" src="https://media2.giphy.com/media/7pppMjAlmfmAE/giphy.gif?cid=ecf05e47rozn1y982no5bknuuhbcqyvtgslz5ygogwpp16o1&rid=giphy.gif&ct=g" alt="Snake Gif">
-        <button type="button" class="player-btn">Two Players</button>
+        <button type="button" class="player-btn" id="two-players">Two Players</button>
         </section>
     </section>
 
     <section class = "game-1" hidden>
         <h1>Snake</h1>
         <!-- <h2 id="game-result"></h2> -->
-        <span class="instructions-1" >
+        <div class="instructions-1" hidden>
             <h1>How to Play</h1>
             <ol>
                 <li>Move snake with arrow keys</li>
@@ -31,9 +31,9 @@
                 <li>Avoid colliding into obstacles or board borders!</li>
             </ol>
             <button id="go-to-game-1">Close</button>
-        </span>
+        </div>
 
-        <div class="result-1">
+        <div class="result-1" hidden>
             <!-- <h1>Result:</h1> -->
             <h1 id="game-result"></h1>
             <!-- <button id = "play-game">Play Game</button> -->
@@ -55,7 +55,9 @@
 
     </section>
 
+    <script>
 
+    </script>
 
 </body> 
 </html>
