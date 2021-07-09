@@ -36,7 +36,6 @@ function logKey(e) {
     }
 }
 
-
 /*-------------------------------- One Player Functions --------------------------------*/
 function createBoard() {
     for (i=0; i<2000; i++) {
