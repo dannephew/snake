@@ -1,6 +1,6 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, foodArray, borderArray, timeLeft, numFood, numObstacles, colObstaclesArray, direction, gameEnd
+let snakeArray, foodArray, borderArray, timeLeft, numFood, numObstacles, colObstaclesArray, direction, gameEnd, theTime
 
 /*------------------------ One Player Cached Element References ------------------------*/
 const emptyBoard = document.querySelector(".grid")
@@ -62,6 +62,7 @@ function init() {
     foodArray = []
     speed = 0.8
     gameEnd = false
+    theTime = timeLeft/5
     makeBorderArray()
     getNumObstacles()
     makeFoodArray()
@@ -94,14 +95,16 @@ resetBtn.onclick = function() {
 }
 
 function timeDisplay() {
-    theTime = timeLeft/5
     let timer = setInterval(function() {
         theTime -= 1
         time.textContent= theTime
         if (theTime <= 0) {
             clearInterval(timer)
+            theTime = 0
+            console.log("thetime", theTime)
             time.textContent= theTime
         }
+        console.log("thetime", theTime)
     }, 1000)
 }
 
