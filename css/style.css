@@ -26,8 +26,6 @@ body {
   }
 
 
- 
-
   #food {
     height: 10px;
     width: 10px;
@@ -197,7 +195,6 @@ body {
   transition: 1s;
 }
 
-
 #play-game {
   margin-top: -50px; 
   color: black;
@@ -237,3 +234,149 @@ body {
   margin-left: 15px;
   margin-bottom: -15px; 
 }
+
+
+
+
+#dot2 {
+  height: 5px;
+  width: 5px;
+  text-align: center;
+  background-color: rgb(15, 161, 154);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow:
+  0 0 20px 3px rgb(199, 198, 198),  
+  0 0 20px 6px rgb(88, 121, 126), 
+  0 0 10px 9px rgb(10, 234, 241); 
+  z-index: 99 !important;
+}
+
+.instructions-2 {
+  color: black;
+  font-family: "Roboto";
+  background-color: #d4d1d1;
+  border: 5px solid #f1f1f1;
+  padding: 0 20px 10px 0;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  z-index: 99;
+  border-style: outset;
+}
+
+.how-to-2 {
+  font-family: "Monster Child";
+}
+
+#go-to-game-2 {
+  color: black;
+  margin-left: 15px; 
+  font-family: "Monster Child";
+  font-size: 20px;
+  background-color: white;
+  padding: -50px 15px -50px 15px;
+  margin: 0 100px 0 100px;
+  transition: 0.5s ease;
+  border: 5px solid whitesmoke;
+  border-style: outset;
+}
+
+#go-to-game-2:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(77, 77, 77);
+  transition: 1s;
+}
+
+
+.game-2 {
+text-align: center;
+background-color: rgb(41, 53, 23);
+margin: 0 100px 0 100px;
+position: relative;
+border-radius: 15px;
+}
+
+.result-2 {
+  border-radius: 15px;
+  padding: 50px 100px 100px 100px; 
+  background-color: #d4d1d1;
+  border: 5px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-style: outset;
+}
+
+#reset-button-2 {
+  color: black;
+  margin-left: 15px; 
+  font-family: "Monster Child";
+  font-size: 40px;
+  background-color: white;
+  vertical-align: middle;
+  transition: 0.5s ease;
+  border: 5px solid whitesmoke;
+  border-style: outset;
+  margin-top: 50px;
+}
+
+#reset-button-2:hover {
+color: whitesmoke;
+background-color: black;
+transition: 1s;
+}
+
+
+
+#play-game-2 {
+  margin-top: -50px; 
+  color: black;
+  margin-left: 15px; 
+  font-family: "Monster Child";
+  font-size: 20px;
+  background-color: white;
+  vertical-align: middle;
+  transition: 0.5s ease;
+  border: 5px solid whitesmoke;
+  border-style: outset;
+  margin-top: 50px;
+}
+
+#play-game-2:hover {
+  color: whitesmoke;
+  background-color: black;
+  transition: 1s;
+}
+
+#game-result-2 {
+  font-family: "Whomp";
+  color: rgb(87, 41, 41);
+  text-shadow: -5px 1px rgb(199, 33, 33);
+  font-size: 40px;
+}
+
+.grid-2 {
+  background-color: black;
+  width: 900px;
+  height: 720px;
+  border: 5px solid whitesmoke;
+  border-style: outset;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 8px;
+  z-index: 5;
+  margin-bottom: -40px;
+}
+
+.grid-2 div {
+  width: 18px;
+  height: 18px;
+  box-sizing:border-box;
+} 
+
