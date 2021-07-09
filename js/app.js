@@ -55,8 +55,8 @@ function logKey(e) {
     }
 }
 
-document.addEventListener('keyup', event => {
-    if (event.code === 'Space') {
+document.addEventListener("keyup", event => {
+    if (event.code === "Space") {
         spacebar.setAttribute("hidden", true)
         resetBtn.removeAttribute("hidden")
         init()
