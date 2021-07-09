@@ -626,3 +626,6 @@ function disablePlayBtn() {
         playBtn.disabled = true
     }
 }
+
+
+/*-------------------------------- Two Player Functions --------------------------------*/
