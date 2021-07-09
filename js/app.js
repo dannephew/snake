@@ -545,6 +545,7 @@ function playerWin() {
     console.log("gameresult", typeof gameResult.textContent)
     console.log("gameresult", gameResult.textContent)
     result()
+    disablePlayBtn()
 }
 
 // let a = []
@@ -585,5 +586,14 @@ function result() {
     if (gameEnd == true) {
         // console.log("gameResult", gameResult.textContent)
         result1.removeAttribute("hidden")
+        // console.log("result1 hidden", result1.hasAttribute("hidden"))
+    }
+}
+console.log("resultpage", result1)
+console.log("result1 hidden", result1.hasAttribute("hidden"))
+
+function disablePlayBtn() {
+    if (!result1.hasAttribute("hidden")) {
+        playBtn.disabled = true
     }
 }
