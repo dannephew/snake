@@ -23,9 +23,12 @@ const onePlayerBtn = document.querySelector("#one-player")
 const game1 = document.querySelector(".game-1")
 const instructions1 = document.querySelector(".instructions-1")
 console.log(instructions1)
+const mainPage = document.querySelector(".main-page")
+const result1 = document.querySelector(".result-1")
+const goto1 = document.querySelector("#go-to-game-1")
 // gameResult.textContent= ""
 // console.log("gameResult", gameResult.textContent)
-const spacebar = document.querySelector("#spacebar")
+// const spacebar = document.querySelector("#spacebar")
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener("keydown", logKey)
@@ -55,24 +58,24 @@ function logKey(e) {
     }
 }
 
-document.addEventListener("keyup", event => {
-    if (event.code === "Space") {
-        spacebar.setAttribute("hidden", true)
-        resetBtn.removeAttribute("hidden")
-        init()
-        // console.log("hi")
-        timer = setInterval(function() {
-            // console.log("hey")
-            timeLeft -= 1
-            console.log(timeLeft)
-            advanceGame()
-            if (timeLeft <= 0) {
-                console.log("clearInterval")
-                clearInterval(timer)
-            }
-            }, 200)    
-    }
-})
+// document.addEventListener("keyup", event => {
+//     if (event.code === "Space") {
+//         spacebar.setAttribute("hidden", true)
+//         resetBtn.removeAttribute("hidden")
+//         init()
+//         // console.log("hi")
+//         timer = setInterval(function() {
+//             // console.log("hey")
+//             timeLeft -= 1
+//             console.log(timeLeft)
+//             advanceGame()
+//             if (timeLeft <= 0) {
+//                 console.log("clearInterval")
+//                 clearInterval(timer)
+//             }
+//             }, 200)    
+//     }
+// })
 
 /*-------------------------------- One Player Functions --------------------------------*/
 
@@ -133,22 +136,22 @@ function init() {
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
 //------------------------------------------------------------------------
-// playBtn.onclick = function() {
-//     // wipeSnake()
-//     resetBtn.removeAttribute("hidden")
-//     init()
-//     // console.log("hi")
-//     timer = setInterval(function() {
-//         // console.log("hey")
-//         timeLeft -= 1
-//         console.log(timeLeft)
-//         advanceGame()
-//         if (timeLeft <= 0) {
-//             console.log("clearInterval")
-//             clearInterval(timer)
-//         }
-//         }, 200)
-// }
+playBtn.onclick = function() {
+    // wipeSnake()
+    resetBtn.removeAttribute("hidden")
+    init()
+    // console.log("hi")
+    timer = setInterval(function() {
+        // console.log("hey")
+        timeLeft -= 1
+        console.log(timeLeft)
+        advanceGame()
+        if (timeLeft <= 0) {
+            console.log("clearInterval")
+            clearInterval(timer)
+        }
+        }, 200)
+}
 //------------------------------------------------------------------------
 
 resetBtn.onclick = function() {
@@ -159,7 +162,7 @@ resetBtn.onclick = function() {
     wipeBoard()
     game1.setAttribute("hidden", true)
     mainPage.removeAttribute("hidden")
-    spacebar.removeAttribute("hidden")
+    // spacebar.removeAttribute("hidden")
 }
 
 
@@ -567,15 +570,15 @@ function playerWin() {
     console.log("gameresult", typeof gameResult.textContent)
     console.log("gameresult", gameResult.textContent)
     result()
-    // disablePlayBtn()
+    disablePlayBtn()
 }
 
 // let a = []
 // console.log("a", a.length)
 
 /*-------------------------------- Page Transition Functions --------------------------------*/
-const mainPage = document.querySelector(".main-page")
-const result1 = document.querySelector(".result-1")
+
+
 onePlayerBtn.onclick = function() {
     game1.removeAttribute("hidden")
     mainPage.setAttribute("hidden", true)
@@ -587,14 +590,15 @@ onePlayerBtn.onclick = function() {
     // instructions1.removeAttribute("hidden")
     // instructions1.setAttribute("display", "inline-block")
     console.log("instructions1", instructions1)
-
+    disablePlayBtn()
+    console.log("instructions is closed?", instructions1.hasAttribute("style"))
 }
 
 
-const goto1 = document.querySelector("#go-to-game-1")
 console.log("goto1", goto1)
 goto1.onclick = function() {
     console.log("goto1 clicked")
+    playBtn.disabled = false
     instructions1.style.display = "none"
     instructions1.setAttribute("display", "none")
     // instructions1.setAttribute("hidden", true)
@@ -614,11 +618,11 @@ function result() {
 console.log("resultpage", result1)
 console.log("result1 hidden", result1.hasAttribute("hidden"))
 
-// function disablePlayBtn() {
-//     console.log("is result hidden", result1.hasAttribute("hidden"))
-//     console.log("playbtn", playBtn)
-//     if (!result1.hasAttribute("hidden")) {
-//         console.log("playbtn.disabled", playBtn.disabled)
-//         playBtn.disabled = true
-//     }
-// }
+function disablePlayBtn() {
+    console.log("is result hidden", result1.hasAttribute("hidden"))
+    console.log("playbtn", playBtn)
+    if (!result1.hasAttribute("hidden") || !instructions1.hasAttribute("style") || !mainPage.hasAttribute("hidden")) {
+        console.log("playbtn.disabled", playBtn.disabled)
+        playBtn.disabled = true
+    }
+}
