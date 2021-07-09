@@ -1,8 +1,6 @@
 
 /*---------------------------- Variables (state) ----------------------------*/
-let snakeArray, foodArray, borderArray, food, timeLeft, speed, obstacle, wall, boardLength, boardWidth, squareLength, tick, numFood, numObstacles, colObstaclesArray, rowObstaclesArray, direction, gameEnd
-
-let snakeArrayP1, snakeArrayP2, foodArray2, borderArray2, food2, tick2, numFood2, numObstacles2, colObstaclesArray2, directionp1, directionp2, gameEnd2, timeLeft2
+let snakeArray, foodArray, borderArray, timeLeft, numFood, numObstacles, colObstaclesArray, direction, gameEnd
 
 /*------------------------ One Player Cached Element References ------------------------*/
 const emptyBoard = document.querySelector(".grid")
@@ -17,19 +15,6 @@ const mainPage = document.querySelector(".main-page")
 const result1 = document.querySelector(".result-1")
 const goto1 = document.querySelector("#go-to-game-1")
 
-
-
-/*------------------------ Two Players Cached Element References ------------------------*/
-const emptyBoard2 = document.querySelector(".grid-2")
-const gameResult2 = document.querySelector("#game-result-2")
-const resetBtn2 = document.querySelector("#reset-button-2")
-const playBtn2 = document.querySelector("#play-game-2")
-const twoPlayerBtn = document.querySelector("#two-players")
-const game2 = document.querySelector(".game-2")
-const instructions2 = document.querySelector(".instructions-2")
-const result2 = document.querySelector(".result-2")
-const goto2 = document.querySelector("#go-to-game-2")
-
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener("keydown", logKey)
 
@@ -38,43 +23,15 @@ function logKey(e) {
     switch(key) {
         case "ArrowUp": 
             direction = 1
-            directionp1 = 1
             break
         case "ArrowDown":
             direction = 2
-            directionp1 = 2
             break
         case "ArrowLeft":
             direction = 3
-            directionp1 = 3
             break
         case "ArrowRight":
             direction = 4
-            directionp1 = 4
-            break
-        case "w": 
-            directionp2 = 1
-            break
-        case "s": 
-            directionp2 = 2
-            break
-        case "a": 
-            directionp2 = 3
-            break
-        case "d":
-            directionp2 = 4
-            break
-        case "W": 
-            directionp2 = 1
-            break
-        case "S": 
-            directionp2 = 2
-            break
-        case "A": 
-            directionp2 = 3
-            break
-        case "D":
-            directionp2 = 4
             break
     }
 }
@@ -410,3 +367,5 @@ function disablePlayBtn() {
         playBtn.disabled = true
     }
 }
+
+
