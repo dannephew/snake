@@ -1,18 +1,22 @@
 body {
-    background-color: black;
+    /* background-image: url("https://images.pexels.com/photos/1276355/pexels-photo-1276355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+    background-color: grey;
     color: red;
     /* text-align: center; */
     /* position: relative; */
+    display: flex;
+    justify-content: center;
 }
 .grid {
     background-color: black;
     width: 900px;
     height: 720px;
-    border: 1px solid red;
+    border: 5px solid whitesmoke;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     font-size: 8px;
+    /* bord; */
     /* padding: 20px; */
     /* position: relative; */
     z-index: 5;
@@ -67,12 +71,18 @@ body {
   }
 
   .main-page {
+    /* height: 100%;
+    width: 100%; */
     background-color: black;
-    border: 1px solid red;
-    padding: 20px;
+    /* border: 1px solid red; */
+    padding: 30px 300px 30px 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 15px;
     text-align: center;
     /* display: block; */
+    box-shadow: 0 0 15px 10px #141414;
+
   }
 
   #main-page-sub{
@@ -149,9 +159,10 @@ body {
 
 .game-1 {
   text-align: center;
-  background-color: rgb(9, 65, 13);
-  border: 1px solid red;
-  padding: 100px 100px 100px 100px;
+  background-color: transparent;
+  /* border: 1px solid red; */
+  /* padding: 100px 100px 100px 100px; */
+  margin: 0 100px 0 100px;
   position: relative;
   border-radius: 15px;
 }
