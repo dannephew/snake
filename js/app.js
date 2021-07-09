@@ -25,6 +25,8 @@ const instructions1 = document.querySelector(".instructions-1")
 console.log(instructions1)
 // gameResult.textContent= ""
 // console.log("gameResult", gameResult.textContent)
+const spacebar = document.querySelector("#spacebar")
+
 /*----------------------------- Event Listeners -----------------------------*/
 document.addEventListener("keydown", logKey)
 
@@ -53,6 +55,24 @@ function logKey(e) {
     }
 }
 
+document.addEventListener('keyup', event => {
+    if (event.code === 'Space') {
+        spacebar.setAttribute("hidden", true)
+        resetBtn.removeAttribute("hidden")
+        init()
+        // console.log("hi")
+        timer = setInterval(function() {
+            // console.log("hey")
+            timeLeft -= 1
+            console.log(timeLeft)
+            advanceGame()
+            if (timeLeft <= 0) {
+                console.log("clearInterval")
+                clearInterval(timer)
+            }
+            }, 200)    
+    }
+})
 
 /*-------------------------------- One Player Functions --------------------------------*/
 
@@ -113,31 +133,33 @@ function init() {
 
 //When clicking the play button, the set timeout function will call advanceGame repeatedly
 //------------------------------------------------------------------------
-playBtn.onclick = function() {
-    // wipeSnake()
-    resetBtn.removeAttribute("hidden")
-    init()
-    // console.log("hi")
-    timer = setInterval(function() {
-        // console.log("hey")
-        timeLeft -= 1
-        console.log(timeLeft)
-        advanceGame()
-        if (timeLeft <= 0) {
-            console.log("clearInterval")
-            clearInterval(timer)
-        }
-        }, 200)
-}
+// playBtn.onclick = function() {
+//     // wipeSnake()
+//     resetBtn.removeAttribute("hidden")
+//     init()
+//     // console.log("hi")
+//     timer = setInterval(function() {
+//         // console.log("hey")
+//         timeLeft -= 1
+//         console.log(timeLeft)
+//         advanceGame()
+//         if (timeLeft <= 0) {
+//             console.log("clearInterval")
+//             clearInterval(timer)
+//         }
+//         }, 200)
+// }
 //------------------------------------------------------------------------
 
 resetBtn.onclick = function() {
     timeLeft = 0
     gameResult.textContent = ""
+    console.log("gameresult", gameResult.textContet)
     wipeSnake()
     wipeBoard()
     game1.setAttribute("hidden", true)
     mainPage.removeAttribute("hidden")
+    spacebar.removeAttribute("hidden")
 }
 
 
@@ -545,7 +567,7 @@ function playerWin() {
     console.log("gameresult", typeof gameResult.textContent)
     console.log("gameresult", gameResult.textContent)
     result()
-    disablePlayBtn()
+    // disablePlayBtn()
 }
 
 // let a = []
@@ -592,8 +614,11 @@ function result() {
 console.log("resultpage", result1)
 console.log("result1 hidden", result1.hasAttribute("hidden"))
 
-function disablePlayBtn() {
-    if (!result1.hasAttribute("hidden")) {
-        playBtn.disabled = true
-    }
-}
+// function disablePlayBtn() {
+//     console.log("is result hidden", result1.hasAttribute("hidden"))
+//     console.log("playbtn", playBtn)
+//     if (!result1.hasAttribute("hidden")) {
+//         console.log("playbtn.disabled", playBtn.disabled)
+//         playBtn.disabled = true
+//     }
+// }

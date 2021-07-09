@@ -1,7 +1,7 @@
 body {
     /* background-image: url("https://images.pexels.com/photos/1276355/pexels-photo-1276355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
     background-color: grey;
-    color: red;
+    color: rgb(151, 51, 51);
     /* text-align: center; */
     /* position: relative; */
     display: flex;
@@ -12,6 +12,7 @@ body {
     width: 900px;
     height: 720px;
     border: 5px solid whitesmoke;
+    border-style: outset;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -53,6 +54,7 @@ body {
 
   #border {
     background-color: green;
+    border:rgb(151, 51, 51)
   }
 
   #dot {
@@ -75,7 +77,7 @@ body {
     width: 100%; */
     background-color: black;
     /* border: 1px solid red; */
-    padding: 30px 300px 30px 300px;
+    padding: 20px 300px 30px 300px;
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 15px;
@@ -83,6 +85,11 @@ body {
     /* display: block; */
     box-shadow: 0 0 15px 10px #141414;
 
+  }
+
+  #snake-title {
+    color: red;
+    text-shadow: -10px 1px rgb(151, 51, 51);
   }
 
   #main-page-sub{
@@ -95,10 +102,12 @@ body {
     left: 0%;
   } */
 
-  #heading {
+  .heading {
     font-family: "Whomp";
     font-size: 100px;
     margin: 0 0 -9px 0;
+    color: red;
+    text-shadow: -10px 1px rgb(151, 51, 51);
   }
 
   .player-btn {
@@ -132,8 +141,10 @@ body {
   } */
 
   .instructions-1 {
-    background-color: yellow;
-    border: 1px solid red;
+    color: black;
+    font-family: "Roboto";
+    background-color: #d4d1d1;
+    border: 5px solid #f1f1f1;
     padding: 0 20px 10px 0;
     /* padding: 100px;  */
     /* text-align: center; */
@@ -144,12 +155,37 @@ body {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     z-index: 99;
+    border-style: outset;
+  }
+
+  .how-to {
+    font-family: "Monster Child";
   }
 
   #go-to-game-1 {
     /* text-align: center; */
     /* padding: 10px 0 0 0; */
+    color: black;
     margin-left: 15px; 
+    font-family: "Monster Child";
+    font-size: 40px;
+    background-color: white;
+    padding: -50px 15px -50px 15px;
+    /* border: none; */
+    margin: 0 100px 0 100px;
+    transition: 0.5s ease;
+    /* border: 5px solide black; */
+    border: 5px solid whitesmoke;
+    border-style: outset;
+  }
+
+  #go-to-game-1:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(77, 77, 77);
+    transition: 1s;
+    /* transition-timing-function: ease-in-out; */
+
+    /* background: whitesmoke; */
   }
 
   ul{
@@ -171,17 +207,69 @@ body {
     border-radius: 15px;
     /* width: 50px;
     height: 50px; */
-    padding: 100px; 
-    background-color: green;
-    border: 1px solid red;
+    padding: 50px 100px 100px 100px; 
+    /* padding-top: -50px; */
+    background-color: #d4d1d1;
+    border: 5px solid #f1f1f1;
     /* padding: 500px; */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-style: outset;
     /* display: flex; */
     /* justify-content: center; */
     /* position: static; */
     /* z-index: 99 !important; */
-
+    /* box-shadow: 0 0 15px 10px #141414; */
   }
+
+#reset-button {
+    /* text-align: center; */
+    /* padding: 10px 0 0 0; */
+    /* display: flex;
+    align-self: flex-end; */
+    color: black;
+    margin-left: 15px; 
+    font-family: "Monster Child";
+    font-size: 40px;
+    background-color: white;
+    vertical-align: middle;
+    /* margin: 10px 0; */
+    /* padding: 100px; */
+    /* padding: 0 100px 0 70px; */
+    /* padding: -50px 15px -50px 15px; */
+    /* border: none; */
+    /* margin: 0 100px 0 100px; */
+    transition: 0.5s ease;
+    /* border: 5px solide black; */
+    border: 5px solid whitesmoke;
+    border-style: outset;
+    margin-top: 50px;
+  }
+
+
+  
+#reset-button:hover {
+  color: whitesmoke;
+  background-color: black;
+  transition: 1s;
+  /* transition-timing-function: ease-in-out; */
+
+  /* background: whitesmoke; */
+}
+
+#spacebar {
+  background: rgb(151, 51, 51);
+  color: red;
+}
+
+#game-title {
+  margin-bottom: -30px;
+  font-size: 60px;
+}
+
+#game-result {
+  font-family: "Whomp";
+  font-size: 40px;
+}
