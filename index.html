@@ -10,22 +10,88 @@
 </head>
 
 <body>
-<section>
-<h1>snake</h1>
-<h2 id="game-result"></h2>
-<h3 id="time"></h3>
-<!-- <canvas id="gameCanvas" width="400" height="400"><canvas> -->
-<section class="grid">
+    <section class="main-page">
+        <!-- <img id="snake-body-pic" src="https://c4.wallpaperflare.com/wallpaper/539/547/814/python-4k-hd-desktop-background-wallpaper-preview.jpg" alt="Snake Pic"> -->
+        <h1 class="heading" id="snake-title">SNAKE</h1>
+        <section id="main-page-sub">
+        <button type="button" class="player-btn" id="one-player">One Player</button>
+        <img id="snake-pic" src="https://i.gifer.com/PhY9.gif" alt="Snake Gif">
+        <button type="button" class="player-btn" id="two-players">Two Players</button>
+        </section>
+    </section>
+
+    <section class = "game-1" hidden>
+        <!-- hidden -----------------------section -->
+        <h1 class="heading" id="game-title">Snake</h1>
+        <!-- <h2 id="game-result"></h2> -->
+        <div class="instructions-1">
+            <h1 class="how-to">How to Play</h1>
+            <ol>
+                <li>Move snake with arrow keys</li>
+                <li>Eat all the food before time runs out</li>
+                <li>Avoid colliding into obstacles or board borders</li>
+            </ol>
+            <button id="go-to-game-1">Close</button>
+        </div>
+
+        <div class="result-1" hidden>
+            <!-- hidden -----------------------section -->
+            <!-- <h1>Result:</h1> -->
+            <h1 id="game-result"></h1>
+            <button id="reset-button" value="reset" hidden>Main Page</button>
+                        <!-- hidden ---------------------------------section -->
+
+        </div>
+        <section id="time-display">
+            <h3>Time Left: </h3>
+            <h3 id="time"></h3>
+        </section>
+        <!-- <canvas id="gameCanvas" width="400" height="400"><canvas> -->
+        <section class="grid">
+        </section>
+        <button id = "play-game">Play Game</button>
+        <!-- <span class="dot"></span> -->
+
+        <!-- <div class="grid"></div> -->
+        <!-- <h3 id="spacebar">Press spacebar to start playing</h3> -->
+        <!-- <form> -->
+            <!-- <button id = "play-game">Play Game</button> -->
+            <!-- <button id="reset-button" value="reset" hidden>Reset</button> -->
+        <!-- </form>   -->
+        
+    </section>
+
+
+    <section class="game-2" hidden>
+        <!-- -------------------------- -->
+        <h1 class="heading" id="game-title">Snake</h1>
+        <section class="instructions-2" hidden>
+                    <!-- -------------------------- -->
+
+            <h1 class="how-to-2">How to Play</h1>
+                <ol>
+                    <li>Eat the other snake before they eat you</li>
+                    <li>If your head hits the other snake, you lose</li>
+                </ol>
+            <button id="go-to-game-2">Next</button>
+        </section>
+
+        <div class="result-2" hidden>
+                    <!-- -------------------------- -->
+
+            
+            <!-- hidden -----------------------section -->
+            <!-- <h1>Result:</h1> -->
+            <h1 id="game-result-2"></h1>
+            <button id="reset-button-2" value="reset" hidden>Main Page</button>
+                        <!-- hidden ---------------------------------section -->
+        </div>
+
+        <section class="grid-2">
+        </section>
+        <button id = "play-game-2">Play Game</button>
+
 </section>
-<!-- <span class="dot"></span> -->
 
-<!-- <div class="grid"></div> -->
-
-<!-- <form> -->
-    <button id = "play-game">Play Game</button>
-	<button id="reset-button" value="reset" hidden>Reset</button>
-<!-- </form>   -->
-</section>
-
-</body>
+</body> 
 </html>
