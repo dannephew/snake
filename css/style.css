@@ -315,7 +315,8 @@ body {
 }
 
 #game-title {
-  margin-bottom: -30px;
+  margin-bottom: -60px;
+  margin-top: -10px;
   font-size: 60px;
 }
 
@@ -520,6 +521,7 @@ color: red;
   display: flex;
   flex-wrap: wrap;
   font-size: 8px;
+
   /* bord; */
   /* padding: 20px; */
   /* position: relative; */
@@ -532,6 +534,13 @@ color: red;
 .grid-2 div {
   width: 18px;
   height: 18px;
-  /* border:0.1px whitesmoke solid; */
+  border:0.1px whitesmoke solid;
   box-sizing:border-box;
+}
+
+#time-display {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-bottom: -15px; 
 }
